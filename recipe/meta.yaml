@@ -1,0 +1,62 @@
+{% set build_version = "0.25.0" %}
+
+package:
+  name: dali
+  version: {{ build_version }}
+
+source:
+  git_url: https://github.com/NVIDIA/DALI/
+  git_rev: v{{ build_version }}
+  patches:
+    - 0002-cxx11-abi.patch
+
+build:
+  number: 1
+  string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - pkg-config {{ pkg_config }}
+    - cmake {{ cmake }}
+    - make {{ make }}
+    - cudatoolkit-dev {{ cudatoolkit }}
+    - cudatoolkit {{ cudatoolkit }}
+    - protobuf {{ protobuf }}
+    - jpeg-turbo {{ jpegturbo }}
+    - ffmpeg {{ ffmpeg }}
+    - python {{ python }}
+    - lmdb {{ lmdb }}
+    - libsndfile
+  host:
+    - opencv {{ opencv }}
+    - libboost {{ boost }}
+    - tensorflow {{ tensorflow }}
+    - python {{ python }}
+    - patchelf
+  run:
+    - python {{ python }}
+    - tensorflow {{ tensorflow }}
+    - cudatoolkit-dev {{ cudatoolkit }}
+    - cudatoolkit {{ cudatoolkit }}
+    - opencv {{ opencv }}
+    - jpeg-turbo {{ jpegturbo }}
+    - lmdb {{ lmdb }}
+    - libsndfile
+
+about:
+  home: https://github.com/NVIDIA/DALI
+  license: Apache-2.0
+  summary: |
+     A library containing both highly optimized building blocks and an execution
+     engine for data pre-processing in deep learning applications
+  description: |
+     A library containing both highly optimized building blocks and an execution
+     engine for data pre-processing in deep learning applications
+  dev_url: https://github.com/NVIDIA/DALI
+  doc_url: https://docs.nvidia.com/deeplearning/sdk/dali-developer-guide/index.html
+
+extra:
+  recipe-maintainers:
+    - open-ce/open-ce-dev-team
