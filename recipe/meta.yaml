@@ -13,15 +13,17 @@ source:
 build:
   number: 1
   string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
+  script_env:
+    - CUDA_HOME
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}
     - pkg-config {{ pkg_config }}
     - cmake {{ cmake }}
     - make {{ make }}
-    - cudatoolkit-dev {{ cudatoolkit }}
     - cudatoolkit {{ cudatoolkit }}
     - protobuf {{ protobuf }}
     - jpeg-turbo {{ jpegturbo }}
@@ -38,7 +40,7 @@ requirements:
   run:
     - python {{ python }}
     - tensorflow {{ tensorflow }}
-    - cudatoolkit-dev {{ cudatoolkit }}
+    - {{ compiler('cuda') }}
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}

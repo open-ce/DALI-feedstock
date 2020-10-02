@@ -43,4 +43,4 @@ for i in "${TF_CFLAGS[@]}";do
 done
 
 
-$COMPILER -std=c++11 -O2 -shared -fPIC ${SRCS} -o ${LIB_NAME} ${INCL_DIRS} -DNDEBUG ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} ${DALI_CFLAGS[@]} ${DALI_LFLAGS[@]}
+${COMPILER} ${CXXFLAGS} -O2 -shared -fPIC ${SRCS} -o ${LIB_NAME} ${INCL_DIRS} -DNDEBUG ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} ${DALI_CFLAGS[@]} ${DALI_LFLAGS[@]}
