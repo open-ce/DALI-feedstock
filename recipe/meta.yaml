@@ -11,10 +11,10 @@ source:
     - 0002-cxx11-abi.patch
 
 build:
-  number: 1
+  number: 2
   string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   script_env:
-    - CUDA_HOME
+    - OPEN_CE_CUDA_HOME
 
 requirements:
   build:
