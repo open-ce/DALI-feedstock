@@ -14,13 +14,12 @@ build:
   number: 2
   string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   script_env:
-    - OPEN_CE_CUDA_HOME
+    - CUDA_HOME
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }}
     - pkg-config {{ pkg_config }}
     - cmake {{ cmake }}
     - make {{ make }}
@@ -40,7 +39,6 @@ requirements:
   run:
     - python {{ python }}
     - tensorflow {{ tensorflow }}
-    - {{ compiler('cuda') }}
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}

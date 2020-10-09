@@ -16,7 +16,7 @@ COMPILER=${CXX}
 PYTHON=${PYTHON:-python}
 LIB_NAME=${1:-"libdali_tf_current.so"}
 SRCS="daliop.cc dali_dataset_op.cc"
-INCL_DIRS="-I$CONDA_PREFIX/include/"
+INCL_DIRS="-I$CUDA_HOME/include -I$CONDA_PREFIX/include/"
 
 DALI_CFLAGS=( $($PYTHON ./dali_compile_flags.py --cflags) )
 DALI_LFLAGS=( $($PYTHON ./dali_compile_flags.py --lflags) )
@@ -43,4 +43,4 @@ for i in "${TF_CFLAGS[@]}";do
 done
 
 
-${COMPILER} ${CXXFLAGS} -O2 -shared -fPIC ${SRCS} -o ${LIB_NAME} ${INCL_DIRS} -DNDEBUG ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} ${DALI_CFLAGS[@]} ${DALI_LFLAGS[@]}
+${COMPILER} -std=c++11 -O2 -shared -fPIC ${SRCS} -o ${LIB_NAME} ${INCL_DIRS} -DNDEBUG ${TF_CFLAGS[@]} ${TF_LFLAGS[@]} ${DALI_CFLAGS[@]} ${DALI_LFLAGS[@]}
