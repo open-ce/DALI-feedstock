@@ -11,7 +11,7 @@ source:
     - 0002-cxx11-abi.patch
 
 build:
-  number: 2
+  number: 3
   string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
