@@ -22,7 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
     - pkg-config {{ pkg_config }}
     - cmake {{ cmake }}
-    - make {{ make }}
+    - make
     - cudatoolkit {{ cudatoolkit }}
     - protobuf {{ protobuf }}
     - jpeg-turbo {{ jpegturbo }}
