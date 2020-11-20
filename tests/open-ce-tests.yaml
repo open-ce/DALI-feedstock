@@ -9,7 +9,7 @@ tests:
         mkdir git-lfs
         cd git-lfs
         ARCH=$(uname -m)
-        if [ "${ARCH}" -eq "x86_64" ]
+        if test "${ARCH}" == "x86_64"
         then
             ARCH="amd64"
         fi
