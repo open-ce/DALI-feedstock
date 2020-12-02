@@ -1,26 +1,27 @@
-From 5d0859b4065556ad12ea95a0794be1f6ff96107d Mon Sep 17 00:00:00 2001
+From e397861f3b6378abfff9da362389f225d22a5783 Mon Sep 17 00:00:00 2001
 From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Tue, 1 Sep 2020 09:51:29 +0000
+Date: Tue, 1 Dec 2020 08:56:10 +0000
 Subject: [PATCH] Update cxx flags to use CXX11 abi
 
 ---
- CMakeLists.txt                       | 3 ++-
+ CMakeLists.txt                       | 4 +++-
  dali_tf_plugin/dali_compile_flags.py | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c20b4e7..b924c48 100644
+index aa0cf9a..d37f2d3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -78,6 +78,7 @@ propagate_option(BUILD_LIBSND)
- propagate_option(BUILD_NVML)
- propagate_option(BUILD_FFTS)
- propagate_option(BUILD_FFMPEG)
-+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+@@ -170,6 +170,8 @@ propagate_option(BUILD_NVML)
+ propagate_option(BUILD_CUFILE)
+ propagate_option(LINK_DRIVER)
  
++add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
++
  get_dali_version(${PROJECT_SOURCE_DIR}/VERSION DALI_VERSION)
  
-@@ -136,7 +137,7 @@ set(CMAKE_CUDA_STANDARD 14)
+ get_dali_extra_version(${PROJECT_SOURCE_DIR}/DALI_EXTRA_VERSION DALI_EXTRA_VERSION)
+@@ -227,7 +229,7 @@ set(CMAKE_CUDA_STANDARD 14)
  set(CMAKE_CUDA_STANDARD_REQUIRED ON)
  
  # CXX flags
