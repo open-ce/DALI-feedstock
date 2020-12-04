@@ -81,20 +81,6 @@ export PYTHONUSERBASE=$PREFIX
 
 $PYTHON -m pip install --no-deps --ignore-installed --user dali/python
 
-
-# Copy tensorflow plugin build script to working directory
-#cp $RECIPE_DIR/build_dali_tf.sh $SRC_DIR/dali_tf_plugin/build_dali_tf.sh
-
-# Build tensorflow plugin
-#export LD_LIBRARY_PATH="$PWD/dali/python/nvidia/dali/:$PREFIX/lib:$LD_LIBRARY_PATH"
-#DALI_PATH=$PREFIX/lib/python${PY_VER}/site-packages/nvidia/dali
-
-#echo "DALI_PATH is ${DALI_PATH}"
-#pushd $SRC_DIR/dali_tf_plugin/
-#source ./build_dali_tf.sh $DALI_PATH/plugin/libdali_tf_current.so
-#${PYTHON} setup.py.in install
-#popd
-
 # Build tensorflow plugin
 export LD_LIBRARY_PATH="$PREFIX/libjpeg-turbo/lib:$PREFIX/lib:$LD_LIBRARY_PATH"
 DALI_PATH=$($PYTHON -c 'import nvidia.dali as dali; import os; print(os.path.dirname(dali.__file__))')
@@ -113,6 +99,12 @@ cmake .. \
 make -j install
 $PYTHON -m pip install --no-deps --ignore-installed .
 popd
+
+# Install the activate / deactivate scripts that set environment variables
+mkdir -p "${PREFIX}"/etc/conda/activate.d
+mkdir -p "${PREFIX}"/etc/conda/deactivate.d
+cp "${RECIPE_DIR}"/../scripts/activate.sh "${PREFIX}"/etc/conda/activate.d/activate-${PKG_NAME}.sh
+cp "${RECIPE_DIR}"/../scripts/deactivate.sh "${PREFIX}"/etc/conda/deactivate.d/deactivate-${PKG_NAME}.sh
 
 # Move tfrecord2idx to host env so it can be found at runtime
 cp $SRC_DIR/tools/tfrecord2idx $PREFIX/bin

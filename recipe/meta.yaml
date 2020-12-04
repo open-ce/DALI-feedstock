@@ -31,7 +31,6 @@ requirements:
     - lmdb {{ lmdb }}
     - libsndfile
   host:
-    #- pthread-stubs
     - opencv {{ opencv }}
     - libboost {{ boost }}
     - tensorflow {{ tensorflow }}
