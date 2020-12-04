@@ -58,6 +58,9 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DBUILD_PYTHON=${BUILD_PYTHON:-ON}                  \
       -DBUILD_JPEG_TURBO=${BUILD_JPEG_TURBO:-ON}          \
       -DBUILD_NVJPEG=${BUILD_NVJPEG:-ON}                  \
+      -DBUILD_OPENCV=${BUILD_OPENCV:-ON}                  \
+      -DBUILD_PROTOBUF=${BUILD_PROTOBUF:-ON}              \
+      -DBUILD_NVJPEG2K=${BUILD_NVJPEG2K}                  \
       -DBUILD_LIBTIFF=${BUILD_LIBTIFF:-ON}                \
       -DBUILD_NVOF=${BUILD_NVOF:-ON}                      \
       -DBUILD_NVDEC=${BUILD_NVDEC:-ON}                    \
@@ -68,6 +71,7 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DWERROR=${WERROR:-ON}                              \
       -DBUILD_WITH_ASAN=${BUILD_WITH_ASAN:-OFF}           \
       -DDALI_BUILD_FLAVOR=${NVIDIA_DALI_BUILD_FLAVOR}     \
+      -DTIMESTAMP=${DALI_TIMESTAMP} -DGIT_SHA=${GIT_SHA-${GIT_FULL_HASH}} \
       ..
 
 make -j"$(nproc --all)" install
@@ -75,21 +79,40 @@ make -j"$(nproc --all)" install
 export PYTHONUSERBASE=$PREFIX
 
 
-pip install --user dali/python
+$PYTHON -m pip install --no-deps --ignore-installed --user dali/python
+
+
 # Copy tensorflow plugin build script to working directory
-cp $RECIPE_DIR/build_dali_tf.sh $SRC_DIR/dali_tf_plugin/build_dali_tf.sh
+#cp $RECIPE_DIR/build_dali_tf.sh $SRC_DIR/dali_tf_plugin/build_dali_tf.sh
 
 # Build tensorflow plugin
-export LD_LIBRARY_PATH="$PWD/dali/python/nvidia/dali/:$PREFIX/lib:$LD_LIBRARY_PATH"
-DALI_PATH=$PREFIX/lib/python${PY_VER}/site-packages/nvidia/dali
+#export LD_LIBRARY_PATH="$PWD/dali/python/nvidia/dali/:$PREFIX/lib:$LD_LIBRARY_PATH"
+#DALI_PATH=$PREFIX/lib/python${PY_VER}/site-packages/nvidia/dali
 
+#echo "DALI_PATH is ${DALI_PATH}"
+#pushd $SRC_DIR/dali_tf_plugin/
+#source ./build_dali_tf.sh $DALI_PATH/plugin/libdali_tf_current.so
+#${PYTHON} setup.py.in install
+#popd
+
+# Build tensorflow plugin
+export LD_LIBRARY_PATH="$PREFIX/libjpeg-turbo/lib:$PREFIX/lib:$LD_LIBRARY_PATH"
+DALI_PATH=$($PYTHON -c 'import nvidia.dali as dali; import os; print(os.path.dirname(dali.__file__))')
 echo "DALI_PATH is ${DALI_PATH}"
 pushd $SRC_DIR/dali_tf_plugin/
-source ./build_dali_tf.sh $DALI_PATH/plugin/libdali_tf_current.so
-popd
+mkdir -p dali_tf_sdist_build
+cd dali_tf_sdist_build
 
-cp $SRC_DIR/build/dali/python/nvidia/dali/*.so $PREFIX/lib
-cp $DALI_PATH/plugin/*.so $PREFIX/lib
+CUDA_VERSION="${cudatoolkit}"
+
+cmake .. \
+      -DCUDA_VERSION:STRING="${CUDA_VERSION}" \
+      -DDALI_BUILD_FLAVOR=${NVIDIA_DALI_BUILD_FLAVOR} \
+      -DTIMESTAMP=${DALI_TIMESTAMP} \
+      -DGIT_SHA=${GIT_SHA}
+make -j install
+$PYTHON -m pip install --no-deps --ignore-installed .
+popd
 
 # Move tfrecord2idx to host env so it can be found at runtime
 cp $SRC_DIR/tools/tfrecord2idx $PREFIX/bin
