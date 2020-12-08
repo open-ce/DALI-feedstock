@@ -35,13 +35,15 @@ tests:
     command: |
         # Disable tests
         rm DALI/dali/test/python/test_operator_spectrogram.py
+        rm DALI/dali/test/python/test_operator_resize_seq.py
 
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
         export OPENCV_IO_ENABLE_JASPER=true
         cd DALI/qa/TL0_python-self-test
         ./test_no_setup.sh
-        cd DALI/dali/test/python
+
+        cd ../../dali/test/python
         nosetests --verbose test_dali_tf_plugin.py:TestDaliTfPluginLoadOk
         nosetests --verbose test_dali_tf_plugin_run.py
         nosetests --verbose test_dali_tf_dataset.py
