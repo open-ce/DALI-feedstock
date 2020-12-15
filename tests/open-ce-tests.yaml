@@ -1,10 +1,9 @@
 tests:
   - name: Setup DALI Tests
     command: |
-{% raw %}
         # Get the DALI repo, which contains the tests
-        git clone -b v$(python -c "import nvidia.dali; print(nvidia.dali.__version__)") https://github.com/NVIDIA/DALI
 
+        git clone -b v$(python -c "import nvidia.dali; print(nvidia.dali.__version__)") https://github.com/NVIDIA/DALI
         # Install git-lfs, which is needed to get test data from DALI_extra
         mkdir git-lfs
         cd git-lfs
@@ -13,6 +12,8 @@ tests:
         then
             ARCH="amd64"
         fi
+
+        conda install -y wget
         wget https://github.com/git-lfs/git-lfs/releases/download/v2.11.0/git-lfs-linux-${ARCH}-v2.11.0.tar.gz
         tar -xvf git-lfs-linux-${ARCH}-v2.11.0.tar.gz
         PREFIX=. ./install.sh
@@ -25,20 +26,29 @@ tests:
         cd DALI_extra
         git fetch origin ${DALI_EXTRA_VERSION}
         PATH=$(pwd)/../../git-lfs/bin:$PATH git checkout ${DALI_EXTRA_VERSION}
-
+        
+        conda install -y scipy scikit-learn numba
         # Install nose for running tests
         pip install nose librosa
-{% endraw %}
-        
+ 
   - name: Run DALI tests
     command: |
         # Disable tests
         rm DALI/dali/test/python/test_operator_spectrogram.py
+        rm DALI/dali/test/python/test_operator_resize_seq.py
 
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
+        export OPENCV_IO_ENABLE_JASPER=true
         cd DALI/qa/TL0_python-self-test
         ./test_no_setup.sh
+
+        cd ../../dali/test/python
+        nosetests --verbose test_dali_tf_plugin.py:TestDaliTfPluginLoadOk
+        nosetests --verbose test_dali_tf_plugin_run.py
+        nosetests --verbose test_dali_tf_dataset.py
+        nosetests --verbose test_dali_tf_dataset_shape.py
+
 
   - name: Clean tests
     command: rm -rf DALI git-lfs
