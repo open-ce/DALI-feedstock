@@ -9,6 +9,7 @@ source:
   git_rev: v{{ build_version }}
   patches:
     - 0002-cxx11-abi.patch
+    - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
   number: 1
