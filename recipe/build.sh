@@ -31,8 +31,14 @@ ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-gcc $CONDA_PREFIX/bin/gcc
 ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-g++ $CONDA_PREFIX/bin/g++
 
 export CXXFLAGS=${CXXFLAGS/-std=c++??/-std=c++14}
+
+PYTHON_INCLUDE_DIR="$PREFIX/include/python${PY_VER}"
+if [[ $PY_VER < '3.8' ]]; then
+    PYTHON_INCLUDE_DIR+="m"
+fi
+
 # Add libjpeg-turbo location to front of CXXFLAGS so it is used instead of jpeg
-export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include ${CXXFLAGS} -DNO_ALIGNED_ALLOC"
+export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC"
 
 # Build
 cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \

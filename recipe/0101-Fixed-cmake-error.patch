@@ -1,0 +1,34 @@
+From 5486ad529027f20cb4d60de1ddc80b7b1470df9d Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Tue, 22 Dec 2020 10:14:08 -0500
+Subject: [PATCH] Fixed cmake error
+
+---
+ cmake/Utils.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/Utils.cmake b/cmake/Utils.cmake
+index c08e70c..34f9be6 100644
+--- a/cmake/Utils.cmake
++++ b/cmake/Utils.cmake
+@@ -342,14 +342,14 @@ function(build_per_python_lib)
+                 COMMAND python${PYVER}-config --extension-suffix
+                 OUTPUT_VARIABLE PYTHON_SUFIX)
+             # remove newline and the extension
+-            string(REPLACE ".so\n" "" PYTHON_SUFIX ${PYTHON_SUFIX})
++            string(REPLACE ".so\n" "" PYTHON_SUFIX "${PYTHON_SUFIX}")
+ 
+             execute_process(
+                 COMMAND python${PYVER}-config --includes
+                 OUTPUT_VARIABLE PYTHON_INCLUDES)
+             # split and make it a list
+-            string(REPLACE "-I" "" PYTHON_INCLUDES ${PYTHON_INCLUDES})
+-            string(REPLACE "\n" "" PYTHON_INCLUDES ${PYTHON_INCLUDES})
++            string(REPLACE "-I" "" PYTHON_INCLUDES "${PYTHON_INCLUDES}")
++            string(REPLACE "\n" "" PYTHON_INCLUDES "${PYTHON_INCLUDES}")
+             separate_arguments(PYTHON_INCLUDES)
+ 
+             add_library(${PYTHON_LIB_TARGET_FOR_PYVER} SHARED)
+-- 
+1.8.3.1
+
