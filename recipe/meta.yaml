@@ -12,7 +12,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 2
+  number: 3
   string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -49,6 +49,8 @@ requirements:
 about:
   home: https://github.com/NVIDIA/DALI
   license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
   summary: |
      A library containing both highly optimized building blocks and an execution
      engine for data pre-processing in deep learning applications
