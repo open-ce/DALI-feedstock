@@ -52,6 +52,12 @@ requirements:
     - lmdb {{ lmdb }}
     - libsndfile
 
+test:
+  requires:
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
+
 about:
   home: https://github.com/NVIDIA/DALI
   license: Apache-2.0
