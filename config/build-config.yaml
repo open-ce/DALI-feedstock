@@ -1,0 +1,6 @@
+recipes:
+{% if build_type == "cuda" %}
+  - name: DALI
+    path: recipe
+{% endif %}
+
