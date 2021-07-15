@@ -36,7 +36,9 @@ requirements:
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
     - lmdb {{ lmdb }}
+    - libtiff
     - libsndfile
+    - libvorbis
     - python-clang
   host:
     - opencv {{ opencv }}
@@ -55,7 +57,9 @@ requirements:
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}
     - lmdb {{ lmdb }}
+    - libtiff
     - libsndfile
+    - libvorbis
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
