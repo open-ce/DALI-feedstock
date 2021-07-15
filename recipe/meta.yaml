@@ -1,4 +1,4 @@
-{% set build_version = "0.28.0" %}
+{% set build_version = "1.3.0" %}
 
 package:
   name: dali
@@ -12,7 +12,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 5
+  number: 1
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -37,6 +37,7 @@ requirements:
     - python {{ python }}
     - lmdb {{ lmdb }}
     - libsndfile
+    - python-clang
   host:
     - opencv {{ opencv }}
     - libboost {{ boost }}
@@ -46,6 +47,7 @@ requirements:
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
+    - future {{ future }}
   run:
     - python {{ python }}
     - tensorflow {{ tensorflow }}
