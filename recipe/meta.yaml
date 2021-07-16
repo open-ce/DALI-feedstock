@@ -24,6 +24,7 @@ requirements:
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
+    - libgfortran-ng  {{ libgfortran }}
     - pkg-config {{ pkg_config }}
     - cmake {{ cmake }}
     - make
@@ -43,6 +44,7 @@ requirements:
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
+    - libgfortran-ng  {{ libgfortran }}
   run:
     - python {{ python }}
     - tensorflow {{ tensorflow }}
