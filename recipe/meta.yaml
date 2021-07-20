@@ -16,9 +16,6 @@ build:
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
-  ignore_run_exports:
-    - libgcc-ng
-    - libstdcxx-ng
 
 requirements:
   build:
@@ -27,11 +24,13 @@ requirements:
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
+    - libgfortran-ng  {{ libgfortran }}
     - pkg-config {{ pkg_config }}
     - cmake {{ cmake }}
     - make
     - cudatoolkit {{ cudatoolkit }}
     - protobuf {{ protobuf }}
+    - libprotobuf-static {{ protobuf }}
     - jpeg-turbo {{ jpegturbo }}
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
@@ -49,20 +48,19 @@ requirements:
     # Use pins to control cos6/cos7 match
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
+    - libgfortran-ng  {{ libgfortran }}
     - future {{ future }}
   run:
     - python {{ python }}
+    - future {{ future }}
     - tensorflow {{ tensorflow }}
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}
     - lmdb {{ lmdb }}
-    - libtiff
     - libsndfile
+    - libtiff
     - libvorbis
-    # Use pins to control cos6/cos7 match
-    - libgcc-ng  {{ libgcc }}
-    - libstdcxx-ng  {{ libstdcxx }}
 
 about:
   home: https://github.com/NVIDIA/DALI
