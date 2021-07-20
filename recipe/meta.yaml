@@ -50,12 +50,15 @@ requirements:
     - future {{ future }}
   run:
     - python {{ python }}
+    - future {{ future }}
     - tensorflow {{ tensorflow }}
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}
     - lmdb {{ lmdb }}
     - libsndfile
+    - libtiff
+    - libvorbis
 
 about:
   home: https://github.com/NVIDIA/DALI
