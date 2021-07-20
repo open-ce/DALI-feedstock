@@ -32,6 +32,7 @@ requirements:
     - make
     - cudatoolkit {{ cudatoolkit }}
     - protobuf {{ protobuf }}
+    - libprotobuf-static {{ protobuf }}
     - jpeg-turbo {{ jpegturbo }}
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
