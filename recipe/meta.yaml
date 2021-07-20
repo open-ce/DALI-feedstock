@@ -35,9 +35,9 @@ requirements:
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
     - lmdb {{ lmdb }}
-    - libtiff
+    - libtiff {{ libtiff }}
     - libsndfile
-    - libvorbis
+    - libvorbis {{ libvorbis }}
     - python-clang
   host:
     - opencv {{ opencv }}
@@ -59,8 +59,8 @@ requirements:
     - jpeg-turbo {{ jpegturbo }}
     - lmdb {{ lmdb }}
     - libsndfile
-    - libtiff
-    - libvorbis
+    - libtiff                         # versioning handled by run_exports
+    - libvorbis                       # versioning handled by run_exports
 
 about:
   home: https://github.com/NVIDIA/DALI
