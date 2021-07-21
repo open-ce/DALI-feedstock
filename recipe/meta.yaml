@@ -34,10 +34,7 @@ requirements:
     - jpeg-turbo {{ jpegturbo }}
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
-    - lmdb {{ lmdb }}
-    - libtiff {{ libtiff }}
     - libsndfile
-    - libvorbis {{ libvorbis }}
     - python-clang
   host:
     - opencv {{ opencv }}
@@ -50,6 +47,9 @@ requirements:
     - libstdcxx-ng  {{ libstdcxx }}
     - libgfortran-ng  {{ libgfortran }}
     - future {{ future }}
+    - lmdb {{ lmdb }}
+    - libtiff {{ libtiff }}
+    - libvorbis {{ libvorbis }}
   run:
     - python {{ python }}
     - future {{ future }}
@@ -57,7 +57,7 @@ requirements:
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}
-    - lmdb {{ lmdb }}
+    - lmdb                            # versioning handled by run_exports
     - libsndfile
     - libtiff                         # versioning handled by run_exports
     - libvorbis                       # versioning handled by run_exports
