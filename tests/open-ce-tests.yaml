@@ -31,7 +31,7 @@ tests:
         #download the binary files
         PATH=$(pwd)/../../git-lfs/bin:$PATH  git-lfs pull
 
-        conda install -y scipy scikit-learn numba psutil
+        conda install -y scipy scikit-learn numba psutil pillow
         # Install nose for running tests
         pip install nose librosa
  
