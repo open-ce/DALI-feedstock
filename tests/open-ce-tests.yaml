@@ -21,6 +21,8 @@ tests:
 
         # Get the DALI_extra repo, which contains test data
         cd DALI
+        git apply ${FEEDSTOCK_DIR}/recipe/0301-skip_test_dali_variable_batch_size.patch
+        git apply ${FEEDSTOCK_DIR}/recipe/0302-skip_test_external_source_parallel.patch
         read -r DALI_EXTRA_VERSION < DALI_EXTRA_VERSION
         # skip smudge to avoid download error
         PATH=$(pwd)/../git-lfs/bin:$PATH git-lfs install --skip-smudge
@@ -40,8 +42,6 @@ tests:
         # Disable tests
         rm DALI/dali/test/python/test_operator_spectrogram.py
         rm DALI/dali/test/python/test_operator_resize_seq.py
-        rm DALI/dali/test/python/test_dali_variable_batch_size.py
-        rm DALI/dali/test/python/test_external_source_parallel.py
 
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
