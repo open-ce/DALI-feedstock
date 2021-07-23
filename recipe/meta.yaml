@@ -1,4 +1,4 @@
-{% set build_version = "0.28.0" %}
+{% set build_version = "1.3.0" %}
 
 package:
   name: dali
@@ -12,7 +12,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 8
+  number: 1
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -30,11 +30,13 @@ requirements:
     - make
     - cudatoolkit {{ cudatoolkit }}
     - protobuf {{ protobuf }}
+    - libprotobuf-static {{ protobuf }}
     - jpeg-turbo {{ jpegturbo }}
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
     - lmdb {{ lmdb }}
     - libsndfile
+    - python-clang
   host:
     - opencv {{ opencv }}
     - libboost {{ boost }}
@@ -46,14 +48,21 @@ requirements:
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
     - libgfortran-ng  {{ libgfortran }}
+    - future {{ future }}
+    - lmdb {{ lmdb }}
+    - libtiff {{ libtiff }}
+    - libvorbis {{ libvorbis }}
   run:
     - python {{ python }}
+    - future {{ future }}
     - tensorflow {{ tensorflow }}
     - cudatoolkit {{ cudatoolkit }}
     - opencv {{ opencv }}
     - jpeg-turbo {{ jpegturbo }}
-    - lmdb {{ lmdb }}
+    - lmdb                            # versioning handled by run_exports
     - libsndfile
+    - libtiff                         # versioning handled by run_exports
+    - libvorbis                       # versioning handled by run_exports
 
 about:
   home: https://github.com/NVIDIA/DALI

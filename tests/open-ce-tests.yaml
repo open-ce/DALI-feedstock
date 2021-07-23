@@ -2,7 +2,7 @@ tests:
   - name: Setup DALI Tests
     command: |
         # Get the DALI repo, which contains the tests
-
+        conda install -y git
         git clone -b v$(python -c "import nvidia.dali; print(nvidia.dali.__version__)") https://github.com/NVIDIA/DALI
         # Install git-lfs, which is needed to get test data from DALI_extra
         mkdir git-lfs
@@ -21,13 +21,19 @@ tests:
 
         # Get the DALI_extra repo, which contains test data
         cd DALI
+        git apply ${FEEDSTOCK_DIR}/recipe/0301-skip_test_dali_variable_batch_size.patch
+        git apply ${FEEDSTOCK_DIR}/recipe/0302-skip_test_external_source_parallel.patch
         read -r DALI_EXTRA_VERSION < DALI_EXTRA_VERSION
+        # skip smudge to avoid download error
+        PATH=$(pwd)/../git-lfs/bin:$PATH git-lfs install --skip-smudge
         PATH=$(pwd)/../git-lfs/bin:$PATH git clone https://github.com/NVIDIA/DALI_extra
         cd DALI_extra
         git fetch origin ${DALI_EXTRA_VERSION}
         PATH=$(pwd)/../../git-lfs/bin:$PATH git checkout ${DALI_EXTRA_VERSION}
-        
-        conda install -y scipy scikit-learn numba
+        #download the binary files
+        PATH=$(pwd)/../../git-lfs/bin:$PATH  git-lfs pull
+
+        conda install -y scipy scikit-learn numba psutil pillow
         # Install nose for running tests
         pip install nose librosa
  
@@ -36,11 +42,19 @@ tests:
         # Disable tests
         rm DALI/dali/test/python/test_operator_spectrogram.py
         rm DALI/dali/test/python/test_operator_resize_seq.py
+        rm DALI/dali/test/python/test_operator_decoders_image.py
+        rm DALI/dali/test/python/test_operator_readers_numpy.py
 
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
         export OPENCV_IO_ENABLE_JASPER=true
-        cd DALI/qa/TL0_python-self-test
+        cd DALI/qa/TL0_python-self-test-core
+        ./test_no_setup.sh
+        cd ../../..
+        cd DALI/qa/TL0_python-self-test-readers-decoders
+        ./test_no_setup.sh
+        cd ../../..
+        cd DALI/qa/TL0_python-self-test-operators
         ./test_no_setup.sh
 
         cd ../../dali/test/python
@@ -48,7 +62,6 @@ tests:
         nosetests --verbose test_dali_tf_plugin_run.py
         nosetests --verbose test_dali_tf_dataset.py
         nosetests --verbose test_dali_tf_dataset_shape.py
-
 
   - name: Clean tests
     command: rm -rf DALI git-lfs

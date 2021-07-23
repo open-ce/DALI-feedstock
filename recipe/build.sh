@@ -15,12 +15,8 @@
 # limitations under the License.
 # *****************************************************************
 
-# Create build directory for cmake and enter it
-mkdir $SRC_DIR/build
-
-cd $SRC_DIR/build
-
 # Determine Architecture
+
 ARCH="$(arch)"
 if [ ${ARCH} = "x86_64" ]; then
     ARCH_LONGNAME="x86_64-conda_cos6"
@@ -35,6 +31,7 @@ fi
 ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-gcc $CONDA_PREFIX/bin/gcc
 ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-g++ $CONDA_PREFIX/bin/g++
 
+# Force -std=c++14 in CXXFLAGS
 export CXXFLAGS=${CXXFLAGS/-std=c++??/-std=c++14}
 
 PYTHON_INCLUDE_DIR="$PREFIX/include/python${PY_VER}"
@@ -45,6 +42,9 @@ fi
 # Add libjpeg-turbo location to front of CXXFLAGS so it is used instead of jpeg
 export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC"
 
+# Create build directory for cmake and enter it
+mkdir $SRC_DIR/build
+cd $SRC_DIR/build
 # Build
 cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DLMDB_INCLUDE_DIR=$CONDA_PREFIX/include/ \

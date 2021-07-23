@@ -1,6 +1,6 @@
-From e397861f3b6378abfff9da362389f225d22a5783 Mon Sep 17 00:00:00 2001
-From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Tue, 1 Dec 2020 08:56:10 +0000
+From 2326c098979689e14d33587a6fa94b94b0a84c14 Mon Sep 17 00:00:00 2001
+From: Deepali Chourasia <deepch23@in.ibm.com>
+Date: Wed, 14 Jul 2021 04:00:27 -0400
 Subject: [PATCH] Update cxx flags to use CXX11 abi
 
 ---
@@ -9,19 +9,19 @@ Subject: [PATCH] Update cxx flags to use CXX11 abi
  2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index aa0cf9a..d37f2d3 100644
+index 1d922cf7..b64df9e4 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -170,6 +170,8 @@ propagate_option(BUILD_NVML)
- propagate_option(BUILD_CUFILE)
- propagate_option(LINK_DRIVER)
+@@ -148,6 +148,8 @@ else()
+   set(LIBTYPE SHARED)
+ endif()
  
 +add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 +
  get_dali_version(${PROJECT_SOURCE_DIR}/VERSION DALI_VERSION)
  
  get_dali_extra_version(${PROJECT_SOURCE_DIR}/DALI_EXTRA_VERSION DALI_EXTRA_VERSION)
-@@ -227,7 +229,7 @@ set(CMAKE_CUDA_STANDARD 14)
+@@ -222,7 +224,7 @@ set(CMAKE_CUDA_STANDARD 14)
  set(CMAKE_CUDA_STANDARD_REQUIRED ON)
  
  # CXX flags
@@ -31,7 +31,7 @@ index aa0cf9a..d37f2d3 100644
  if (WERROR)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 diff --git a/dali_tf_plugin/dali_compile_flags.py b/dali_tf_plugin/dali_compile_flags.py
-index 3c84417..cc45b00 100644
+index 3c844178..cc45b00d 100644
 --- a/dali_tf_plugin/dali_compile_flags.py
 +++ b/dali_tf_plugin/dali_compile_flags.py
 @@ -28,7 +28,7 @@ def get_dali_build_flags():
@@ -44,5 +44,5 @@ index 3c84417..cc45b00 100644
      if dali_include_flags == '' and dali_cflags == '' and dali_lflags == '':
          raise ImportError('Could not find DALI.')
 -- 
-1.8.3.1
+2.23.0
 
