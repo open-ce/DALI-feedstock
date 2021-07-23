@@ -42,6 +42,7 @@ requirements:
     - python {{ python }}
     - patchelf
     # Use pins to control cos6/cos7 match
+    - libidn2  2.3.1     #[x86_64]
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
     - libgfortran-ng  {{ libgfortran }}
