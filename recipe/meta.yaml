@@ -10,6 +10,7 @@ source:
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
+    - 0102-Fix-error-using-gcc-8.patch    #[ppc64le]
 
 build:
   number: 2

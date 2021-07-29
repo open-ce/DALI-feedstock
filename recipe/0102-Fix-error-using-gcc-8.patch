@@ -1,0 +1,44 @@
+From f876e817fa98ab7f14bf498c3a96e3a7a29ec823 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 29 Jul 2021 09:40:52 -0400
+Subject: [PATCH] Fix error using gcc 8
+
+---
+ dali/operators/audio/mfcc/mfcc.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/dali/operators/audio/mfcc/mfcc.h b/dali/operators/audio/mfcc/mfcc.h
+index c6d4d06e..eb55f03c 100644
+--- a/dali/operators/audio/mfcc/mfcc.h
++++ b/dali/operators/audio/mfcc/mfcc.h
+@@ -88,22 +88,22 @@ class MFCC : public Operator<Backend> {
+   void GetArguments(const workspace_t<Backend> &ws) {
+     auto nsamples = ws.template InputRef<Backend>(0).shape().size();
+     DctArgs arg;
+-    arg.ndct = spec_.template GetArgument<int>("n_mfcc");
++    arg.ndct = this->spec_.template GetArgument<int>("n_mfcc");
+     DALI_ENFORCE(arg.ndct > 0, "number of MFCCs should be > 0");
+ 
+-    arg.dct_type = spec_.template GetArgument<int>("dct_type");
++    arg.dct_type = this->spec_.template GetArgument<int>("dct_type");
+     DALI_ENFORCE(arg.dct_type >= 1 && arg.dct_type <= 4,
+       make_string("Unsupported DCT type: ", arg.dct_type, ". Supported types are: 1, 2, 3, 4."));
+ 
+-    arg.normalize = spec_.template GetArgument<bool>("normalize");
++    arg.normalize = this->spec_.template GetArgument<bool>("normalize");
+     if (arg.normalize) {
+       DALI_ENFORCE(arg.dct_type != 1, "Ortho-normalization is not supported for DCT type I.");
+     }
+ 
+-    axis_ = spec_.template GetArgument<int>("axis");
++    axis_ = this->spec_.template GetArgument<int>("axis");
+     DALI_ENFORCE(axis_ >= 0);
+ 
+-    lifter_ = spec_.template GetArgument<float>("lifter");
++    lifter_ = this->spec_.template GetArgument<float>("lifter");
+     args_.clear();
+     args_.resize(nsamples, arg);
+   }
+-- 
+2.23.0
+
