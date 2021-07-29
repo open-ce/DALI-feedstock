@@ -37,7 +37,7 @@ requirements:
     - python {{ python }}
     - lmdb {{ lmdb }}
     - libsndfile
-    - python-clang
+    - python-clang {{ clang }}
   host:
     - opencv {{ opencv }}
     - libboost {{ boost }}
