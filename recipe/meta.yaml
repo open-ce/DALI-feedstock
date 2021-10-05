@@ -17,7 +17,7 @@ source:
     - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
-  number: 5
+  number: 6
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -45,6 +45,7 @@ requirements:
     - python-clang {{ clang }}
   host:
     - opencv {{ opencv }}
+    - jpeg {{ jpeg }}
     - libboost {{ boost }}
     - tensorflow {{ tensorflow }}
     - python {{ python }}
