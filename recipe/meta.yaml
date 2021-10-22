@@ -13,11 +13,10 @@ source:
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
-
     - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
-  number: 6
+  number: 7
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -46,6 +45,7 @@ requirements:
   host:
     - opencv {{ opencv }}
     - jpeg {{ jpeg }}
+    - jasper {{ jasper }} h07fcdf6_1
     - libboost {{ boost }}
     - tensorflow {{ tensorflow }}
     - python {{ python }}
