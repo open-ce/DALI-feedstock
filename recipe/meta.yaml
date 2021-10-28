@@ -85,7 +85,7 @@ outputs:
         - libsndfile
         - python-clang {{ clang }}
       host:
-        - dali
+        - {{ pin_subpackage('dali') }}
         - python {{ python }}
       run:
         - python {{ python }}
@@ -98,7 +98,7 @@ outputs:
         - libsndfile
         - libtiff                         # versioning handled by run_exports
         - libvorbis                       # versioning handled by run_exports
-        - dali
+        - {{ pin_subpackage('dali') }}
       
 about:
   home: https://github.com/NVIDIA/DALI
