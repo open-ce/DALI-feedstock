@@ -1,4 +1,7 @@
 {% set build_version = "1.4.0" %}
+{% set arch = "ppc64le" %}    #[ppc64le]
+{% set arch = "64" %}    #[x86_64]
+
 
 package:
   name: dali
@@ -17,49 +20,86 @@ source:
     - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
 
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - pkg-config {{ pkg_config }}
-    - cmake {{ cmake }}
-    - make
-    - cudatoolkit {{ cudatoolkit }}
-    - protobuf {{ protobuf }}
-    - libprotobuf-static {{ protobuf }}
-    - jpeg-turbo {{ jpegturbo }}
-    - ffmpeg {{ ffmpeg }}
-    - python {{ python }}
-    - lmdb {{ lmdb }}
-    - libsndfile
-    - python-clang {{ clang }}
-  host:
-    - opencv {{ opencv }}
-    - libboost {{ boost }}
-    - tensorflow {{ tensorflow }}
-    - python {{ python }}
-    - patchelf
-    - future {{ future }}
-    - lmdb {{ lmdb }}
-    - libtiff {{ libtiff }}
-    - libvorbis {{ libvorbis }}
-  run:
-    - python {{ python }}
-    - future {{ future }}
-    - tensorflow {{ tensorflow }}
-    - cudatoolkit {{ cudatoolkit }}
-    - opencv {{ opencv }}
-    - jpeg-turbo {{ jpegturbo }}
-    - lmdb                            # versioning handled by run_exports
-    - libsndfile
-    - libtiff                         # versioning handled by run_exports
-    - libvorbis                       # versioning handled by run_exports
+outputs:
+  - name: dali
+    script: build-dali.sh
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - pkg-config {{ pkg_config }}
+        - cmake {{ cmake }}
+        - make
+        - cudatoolkit {{ cudatoolkit }}
+        - protobuf {{ protobuf }}
+        - libprotobuf-static {{ protobuf }}
+        - jpeg-turbo {{ jpegturbo }}
+        - ffmpeg {{ ffmpeg }}
+        - python {{ python }}
+        - lmdb {{ lmdb }}
+        - libsndfile
+        - python-clang {{ clang }}
+      host:
+        - opencv {{ opencv }}
+        - libboost {{ boost }}
+        - tensorflow {{ tensorflow }}
+        - python {{ python }}
+        - patchelf
+        - future {{ future }}
+        - lmdb {{ lmdb }}
+        - libtiff {{ libtiff }}
+        - libvorbis {{ libvorbis }}
+      run:
+        - python {{ python }}
+        - future {{ future }}
+        - tensorflow {{ tensorflow }}
+        - cudatoolkit {{ cudatoolkit }}
+        - opencv {{ opencv }}
+        - jpeg-turbo {{ jpegturbo }}
+        - lmdb                            # versioning handled by run_exports
+        - libsndfile
+        - libtiff                         # versioning handled by run_exports
+        - libvorbis                       # versioning handled by run_exports
 
+  - name: dali-tf-plugin
+    script: build-dali-tf-plugin.sh
+    requirements:
+      build:
+        - gcc_linux-{{ arch }} 8.*
+        - gxx_linux-{{ arch }} 8.*
+        - pkg-config {{ pkg_config }}
+        - cmake {{ cmake }}
+        - make
+        - cudatoolkit {{ cudatoolkit }}
+        - protobuf {{ protobuf }}
+        - libprotobuf-static {{ protobuf }}
+        - jpeg-turbo {{ jpegturbo }}
+        - ffmpeg {{ ffmpeg }}
+        - python {{ python }}
+        - lmdb {{ lmdb }}
+        - libsndfile
+        - python-clang {{ clang }}
+      host:
+        - {{ pin_subpackage('dali') }}
+        - python {{ python }}
+      run:
+        - python {{ python }}
+        - future {{ future }}
+        - tensorflow {{ tensorflow }}
+        - cudatoolkit {{ cudatoolkit }}
+        - opencv {{ opencv }}
+        - jpeg-turbo {{ jpegturbo }}
+        - lmdb                            # versioning handled by run_exports
+        - libsndfile
+        - libtiff                         # versioning handled by run_exports
+        - libvorbis                       # versioning handled by run_exports
+        - {{ pin_subpackage('dali') }}
+      
 about:
   home: https://github.com/NVIDIA/DALI
   license: Apache-2.0
