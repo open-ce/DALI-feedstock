@@ -81,6 +81,8 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DVERBOSE_LOGS=${VERBOSE_LOGS:-OFF}                 \
       -DWERROR=${WERROR:-ON}                              \
       -DBUILD_WITH_ASAN=${BUILD_WITH_ASAN:-OFF}           \
+      -DBUILD_LIBTAR=${BUILD_LIBTAR:-ON}                  \
+      -DLIBTAR_ROOT_DIR=$CONDA_PREFIX                     \
       -DDALI_BUILD_FLAVOR=${NVIDIA_DALI_BUILD_FLAVOR}     \
       -DTIMESTAMP=${DALI_TIMESTAMP} -DGIT_SHA=${GIT_SHA-${GIT_FULL_HASH}} \
       ..

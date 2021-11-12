@@ -4,3 +4,6 @@ recipes:
     path: recipe
 {% endif %}
 
+channels:
+  - defaults
+  - conda-forge
