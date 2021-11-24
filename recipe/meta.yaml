@@ -11,12 +11,9 @@ source:
   # temporary fork for broken 1.4
   git_url: https://github.com/NVIDIA/DALI/
   git_rev: v{{ build_version }}-dev
-  #git_url: https://github.com/open-ce/DALI/
-  #git_rev: release_v1.7
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
-
     - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
@@ -43,6 +40,7 @@ outputs:
         - python {{ python }}
         - lmdb {{ lmdb }}
         - libsndfile
+        - libtar {{ libtar }}
         - python-clang {{ clang }}
       host:
         - opencv {{ opencv }}
@@ -54,7 +52,6 @@ outputs:
         - lmdb {{ lmdb }}
         - libtiff {{ libtiff }}
         - libvorbis {{ libvorbis }}
-        - libtar
       run:
         - python {{ python }}
         - future {{ future }}
@@ -66,6 +63,7 @@ outputs:
         - libsndfile
         - libtiff                         # versioning handled by run_exports
         - libvorbis                       # versioning handled by run_exports
+        - libtar {{ libtar }}
 
   - name: dali-tf-plugin
     script: build-dali-tf-plugin.sh
@@ -85,7 +83,7 @@ outputs:
         - lmdb {{ lmdb }}
         - libsndfile
         - python-clang {{ clang }}
-        - libtar
+        - libtar {{ libtar }}
       host:
         - {{ pin_subpackage('dali') }}
         - python {{ python }}

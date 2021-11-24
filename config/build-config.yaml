@@ -6,4 +6,3 @@ recipes:
 
 channels:
   - defaults
-  - conda-forge
