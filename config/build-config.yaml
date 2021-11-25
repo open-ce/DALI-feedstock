@@ -4,5 +4,3 @@ recipes:
     path: recipe
 {% endif %}
 
-channels:
-  - defaults
