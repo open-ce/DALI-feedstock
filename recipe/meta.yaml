@@ -1,4 +1,4 @@
-{% set build_version = "1.4.0" %}
+{% set build_version = "1.9.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -9,18 +9,15 @@ package:
 
 source:
   # temporary fork for broken 1.4
-  #git_url: https://github.com/NVIDIA/DALI/
-  #git_rev: v{{ build_version }}
-  git_url: https://github.com/open-ce/DALI/
-  git_rev: release_v1.4
+  git_url: https://github.com/NVIDIA/DALI/
+  git_rev: v{{ build_version }}-dev
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
-
     - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
-  number: 2
+  number: 1
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -43,6 +40,7 @@ outputs:
         - python {{ python }}
         - lmdb {{ lmdb }}
         - libsndfile
+        - libtar {{ libtar }}
         - python-clang {{ clang }}
       host:
         - opencv {{ opencv }}
@@ -65,6 +63,7 @@ outputs:
         - libsndfile
         - libtiff                         # versioning handled by run_exports
         - libvorbis                       # versioning handled by run_exports
+        - libtar {{ libtar }}
 
   - name: dali-tf-plugin
     script: build-dali-tf-plugin.sh
@@ -84,6 +83,7 @@ outputs:
         - lmdb {{ lmdb }}
         - libsndfile
         - python-clang {{ clang }}
+        - libtar {{ libtar }}
       host:
         - {{ pin_subpackage('dali') }}
         - python {{ python }}
