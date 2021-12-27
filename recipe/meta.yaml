@@ -1,4 +1,4 @@
-{% set build_version = "1.9.0" %}
+{% set build_version = "1.10.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -8,13 +8,11 @@ package:
   version: {{ build_version }}
 
 source:
-  # temporary fork for broken 1.4
   git_url: https://github.com/NVIDIA/DALI/
   git_rev: v{{ build_version }}-dev
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
-    - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
   number: 1

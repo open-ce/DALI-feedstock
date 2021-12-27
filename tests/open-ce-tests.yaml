@@ -3,8 +3,8 @@ tests:
     command: |
         # Get the DALI repo, which contains the tests
         conda install -y git
-        DALI_REPO="https://github.com/open-ce/DALI"
-        DALI_BRANCH="release_v1.4"
+        DALI_REPO="https://github.com/NVIDIA/DALI"
+        DALI_BRANCH="v1.10.0-dev"
         git clone -b ${DALI_BRANCH} ${DALI_REPO}
         # Install git-lfs, which is needed to get test data from DALI_extra
         mkdir git-lfs
