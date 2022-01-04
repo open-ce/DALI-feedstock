@@ -1,6 +1,6 @@
-From b9288fea1edf2b441e2411f14b9827f88e91cd61 Mon Sep 17 00:00:00 2001
+From 4c5c727d6b81420a9656f6aad499c81577524982 Mon Sep 17 00:00:00 2001
 From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Sat, 9 Oct 2021 05:31:09 -0400
+Date: Tue, 4 Jan 2022 11:06:02 +0000
 Subject: [PATCH] skip test_external_source_parallel
 
 ---
@@ -8,18 +8,18 @@ Subject: [PATCH] skip test_external_source_parallel
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/qa/TL0_python-self-test-readers-decoders/test_body.sh b/qa/TL0_python-self-test-readers-decoders/test_body.sh
-index 8d43ce9e..61c948cf 100644
+index 589e43e0..7401b43c 100644
 --- a/qa/TL0_python-self-test-readers-decoders/test_body.sh
 +++ b/qa/TL0_python-self-test-readers-decoders/test_body.sh
-@@ -3,7 +3,7 @@
- test_nose() {
-     for test_script in $(ls test_operator_readers_*.py test_operator_decoders_*.py \
+@@ -12,7 +12,7 @@ test_nose() {
        test_external_source_dali.py test_external_source_numpy.py \
--      test_pool.py test_external_source_parallel.py test_external_source_parallel_shared_batch.py); do
-+      test_pool.py test_external_source_parallel_shared_batch.py); do
+       test_external_source_parallel_garbage_collection_order.py \
+       test_external_source_parallel_custom_serialization.py \
+-      test_pool.py test_external_source_parallel.py test_external_source_parallel_shared_batch.py \
++      test_pool.py test_external_source_parallel_shared_batch.py \
+       | sed "/$FILTER_PATTERN/d"); do
          nosetests --verbose --attr '!slow' ${test_script}
      done
- }
 -- 
-2.23.0
+2.32.0
 
