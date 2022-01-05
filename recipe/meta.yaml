@@ -8,16 +8,14 @@ package:
   version: {{ build_version }}
 
 source:
-  # temporary fork for broken 1.4
   git_url: https://github.com/NVIDIA/DALI/
-  git_rev: v{{ build_version }}-dev
+  git_rev: v{{ build_version }}
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
-    - 0303-Fix-DALI-installation-for-py39.patch
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
