@@ -51,7 +51,6 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DLMDB_LIBRARIES=$CONDA_PREFIX/lib/liblmdb.so \
       -DCMAKE_CUDA_COMPILER=${CUDA_HOME}/bin/nvcc \
       -DCMAKE_CUDA_HOST_COMPILER=${CXX} \
-      -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -std=c++14 -I$PREFIX/include " \
       -DCUDA_rt_LIBRARY=$CONDA_PREFIX/${ARCH_LONGNAME}-linux-gnu/sysroot/usr/lib/librt.so \
       -DCUDA_TARGET_ARCHS=${CUDA_TARGET_ARCHS} \
       -DNVJPEG_ROOT_DIR=$CONDA_PREFIX/lib64/ \
