@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2019, 2021. All Rights Reserved.
+# (C) Copyright IBM Corp. 2019, 2022. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DNVJPEG_ROOT_DIR=$CONDA_PREFIX/lib64/ \
       -DFFMPEG_ROOT_DIR=$CONDA_PREFIX \
       -DLIBSND_ROOT_DIR=$CONDA_PREFIX \
-      -DJPEG_INCLUDE_DIR=$CONDA_PREFIX/libjpeg-turbo/lib64 \
+      -DJPEG_INCLUDE_DIR=$CONDA_PREFIX/libjpeg-turbo/include \
       -DTIFF_INCLUDE_DIR=$PREFIX/lib \
       -DTIFF_LIBRARY=$PREFIX/lib/libtiff.so \
       -DJPEG_LIBRARY=$CONDA_PREFIX/libjpeg-turbo/lib64/libjpeg.so \
