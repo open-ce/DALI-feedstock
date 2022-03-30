@@ -12,7 +12,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 11
+  number: 12
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -34,6 +34,8 @@ requirements:
     - jpeg-turbo {{ jpegturbo }}
     - ffmpeg {{ ffmpeg }}
     - python {{ python }}
+    - zlib {{ zlib }} h7b6447c_3
+    - openh264 2.1.0
     - lmdb {{ lmdb }}
     - libsndfile
   host:
@@ -49,6 +51,8 @@ requirements:
     - libgcc-ng  {{ libgcc }}
     - libstdcxx-ng  {{ libstdcxx }}
     - libgfortran-ng  {{ libgfortran }}
+    - zlib {{ zlib }} h7b6447c_3
+    - openh264 2.1.0
   run:
     - python {{ python }}
     - tensorflow {{ tensorflow }}
