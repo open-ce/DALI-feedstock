@@ -1,4 +1,4 @@
-{% set build_version = "1.9.0" %}
+{% set build_version = "1.10.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -40,6 +40,8 @@ outputs:
         - libsndfile
         - libtar {{ libtar }}
         - python-clang {{ clang }}
+        - zlib {{ zlib }} h7b6447c_3
+        - openh264 2.1.0
       host:
         - opencv {{ opencv }}
         - libboost {{ boost }}
@@ -50,6 +52,8 @@ outputs:
         - lmdb {{ lmdb }}
         - libtiff {{ libtiff }}
         - libvorbis {{ libvorbis }}
+        - zlib {{ zlib }} h7b6447c_3
+        - openh264 2.1.0 
       run:
         - python {{ python }}
         - future {{ future }}
