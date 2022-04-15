@@ -15,7 +15,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 2
+  number: 3
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -56,6 +56,7 @@ outputs:
         - openh264 2.1.0 
       run:
         - python {{ python }}
+        - setuptools {{ setuptools }}
         - future {{ future }}
         - tensorflow {{ tensorflow }}
         - cudatoolkit {{ cudatoolkit }}
