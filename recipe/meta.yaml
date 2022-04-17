@@ -56,7 +56,6 @@ outputs:
         - openh264 2.1.0 
       run:
         - python {{ python }}
-        - setuptools {{ setuptools }}
         - future {{ future }}
         - tensorflow {{ tensorflow }}
         - cudatoolkit {{ cudatoolkit }}
@@ -87,9 +86,11 @@ outputs:
         - libsndfile
         - python-clang {{ clang }}
         - libtar {{ libtar }}
+        - setuptools {{ setuptools }}
       host:
         - {{ pin_subpackage('dali') }}
         - python {{ python }}
+        - setuptools {{ setuptools }}
       run:
         - python {{ python }}
         - future {{ future }}
