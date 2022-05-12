@@ -15,7 +15,7 @@ source:
     - 0101-Fixed-cmake-error.patch        #[x86_64]
 
 build:
-  number: 3
+  number: 4
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -69,6 +69,8 @@ outputs:
 
   - name: dali-tf-plugin
     script: build-dali-tf-plugin.sh
+    build:
+      string: cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
     requirements:
       build:
         - gcc_linux-{{ arch }} 8.*
