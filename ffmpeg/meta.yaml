@@ -1,0 +1,51 @@
+# Copyright (c) 2022, IBM
+# Copyright (c) 2021-2022, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+{% set build_version = "5.0.1" %}
+
+  package:
+    name: dali-ffmpeg
+    version: {{ build_version }}
+
+  source:
+    fn: FFmpeg-n5.0.1.tar.gz
+    url: https://developer.download.nvidia.com/compute/redist/nvidia-dali/FFmpeg-n5.0.1.tar.gz
+    sha256: c0dd80d97e6e124fbe9c170a47ab23700e37cbc08730e105f6675c6c2c4d2f27
+
+  build:
+    number: 1
+    string: dali_ffmpeg
+
+  requirements:
+    build:
+      - {{ compiler('c') }}
+      - {{ compiler('cxx') }}
+      - make
+      - nasm
+      - libtool
+      - zlib {{ zlib }}
+
+about:
+  home: http://www.ffmpeg.org/
+  license: GPL 3
+  license_file: COPYING.GPLv3  # [unix]
+  summary: Cross-platform solution to record, convert and stream audio and video.
+  dev_url: https://ffmpeg.org/developer.html
+  doc_url: https://ffmpeg.org/documentation.html
+
+extra:
+  recipe-maintainers:
+    - open-ce/open-ce-dev-team
+

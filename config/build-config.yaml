@@ -2,6 +2,8 @@ recipes:
 {% if build_type == "cuda" %}
   - name: DALI
     path: recipe
+  - name: dali-ffmpeg
+    path: ffmpeg
 {% endif %}
 
 channels:             #[ppc64le]
