@@ -13,6 +13,7 @@ source:
   patches:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
+    - 0303-Fixed-errors-encountered-with-GCC-11.patch
 
 build:
   number: 1
