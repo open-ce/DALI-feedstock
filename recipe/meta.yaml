@@ -14,7 +14,6 @@ source:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
-    - 0304-Fixed-may-be-uninitialized-error.patch
 
 build:
   number: 1

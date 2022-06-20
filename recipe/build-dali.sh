@@ -40,7 +40,7 @@ if [[ $PY_VER < '3.8' ]]; then
 fi
 
 # Add libjpeg-turbo location to front of CXXFLAGS so it is used instead of jpeg
-export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC -Wno-error=free-nonheap-object -fplt"
+export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC -Wno-error=free-nonheap-object -Wno-error=maybe-uninitialized -fplt"
 
 # Create build directory for cmake and enter it
 mkdir $SRC_DIR/build
