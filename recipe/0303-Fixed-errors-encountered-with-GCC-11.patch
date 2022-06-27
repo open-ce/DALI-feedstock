@@ -1,13 +1,12 @@
-From 19a40f09c743b638ddfa810886a812363414b583 Mon Sep 17 00:00:00 2001
+From a89da6e294e8b65707e633a17f4e21d5d5963a0c Mon Sep 17 00:00:00 2001
 From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Wed, 15 Jun 2022 14:09:53 +0000
-Subject: [PATCH] Fixed errors encountered with GCC 11
+Date: Mon, 27 Jun 2022 09:46:34 +0000
+Subject: [PATCH] Fixed errors with GCC11
 
 ---
- dali/pipeline/executor/executor_test.cc       | 12 ++++++------
- dali/pipeline/operator/sequence_shape_test.cc |  4 ++--
- include/dali/core/convert.h                   |  2 +-
- 3 files changed, 9 insertions(+), 9 deletions(-)
+ dali/pipeline/executor/executor_test.cc | 12 ++++++------
+ include/dali/core/convert.h             |  2 +-
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/dali/pipeline/executor/executor_test.cc b/dali/pipeline/executor/executor_test.cc
 index d914054f..2c7aaaeb 100644
@@ -44,28 +43,6 @@ index d914054f..2c7aaaeb 100644
    }
  }
  
-diff --git a/dali/pipeline/operator/sequence_shape_test.cc b/dali/pipeline/operator/sequence_shape_test.cc
-index d6ba84c5..374c251d 100644
---- a/dali/pipeline/operator/sequence_shape_test.cc
-+++ b/dali/pipeline/operator/sequence_shape_test.cc
-@@ -151,7 +151,7 @@ class SequenceShapeUnfoldTVTest : public ::testing::Test {
-     if (!layout.empty()) {
-       batch.SetLayout(layout);
-     }
--    return std::move(batch);
-+    return batch;
-   }
- 
-   void TestUnfolding(TensorVector<Backend> &batch, int ndims_to_unfold) {
-@@ -231,7 +231,7 @@ class SequenceShapeUnfoldTLTest : public ::testing::Test {
-     if (!layout.empty()) {
-       batch.SetLayout(layout);
-     }
--    return std::move(batch);
-+    return batch;
-   }
- 
-   void TestUnfolding(TensorList<Backend> &batch, int ndims_to_unfold, bool check_layout = true) {
 diff --git a/include/dali/core/convert.h b/include/dali/core/convert.h
 index d0786e15..f3795d71 100644
 --- a/include/dali/core/convert.h
