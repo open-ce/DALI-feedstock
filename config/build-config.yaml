@@ -2,9 +2,11 @@ recipes:
 {% if build_type == "cuda" %}
   - name: DALI
     path: recipe
+  - name: dali-ffmpeg
+    path: ffmpeg
 {% endif %}
 
 channels:             #[ppc64le]
   - defaults          #[ppc64le]
-  - conda-forge       #[ppc64le]
+  - conda-forge       #[ppc64le and cudatoolkit == '11.2']
 

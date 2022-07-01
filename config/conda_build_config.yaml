@@ -1,4 +1,6 @@
 c_compiler_version:
-  - 7.5.*
+  - 7.5.*                   #[cudatoolkit == '11.2']
 cxx_compiler_version:
-  - 7.5.*
+  - 7.5.*                   #[cudatoolkit == '11.2']
+dali_tf_plugin_compiler:
+  - 8.*                     #[cudatoolkit == '11.2']
