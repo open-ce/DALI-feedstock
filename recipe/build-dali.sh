@@ -19,9 +19,9 @@
 
 ARCH="$(arch)"
 if [ ${ARCH} = "x86_64" ]; then
-    ARCH_LONGNAME="x86_64-conda_cos6"
+    ARCH_LONGNAME="x86_64-conda"
 elif [ ${ARCH} = "ppc64le" ]; then
-    ARCH_LONGNAME="powerpc64le-conda_cos7"
+    ARCH_LONGNAME="powerpc64le-conda"
 else
     echo "Error: Unsupported Architecture. Expected: [x86_64|ppc64le] Actual: ${ARCH}"
     exit 1
