@@ -91,6 +91,15 @@ make -j"$(nproc --all)" install
 
 export PYTHONUSERBASE=$PREFIX
 
+# set RPATH of backend_impl.so and similar to $ORIGIN, $ORIGIN$UPDIRS, $ORIGIN$UPDIRS/.libs
+PKGNAME_PATH=$PWD/dali/python/nvidia/dali
+find $PKGNAME_PATH -type f -name "*.so*" -o -name "*.bin" | while read FILE; do
+    UPDIRS=$(dirname $(echo "$FILE" | sed "s|$PKGNAME_PATH||") | sed 's/[^\/][^\/]*/../g')
+    echo "Setting rpath of $FILE to '\$ORIGIN:\$ORIGIN$UPDIRS:\$ORIGIN$UPDIRS/.libs'"
+    patchelf --set-rpath "\$ORIGIN:\$ORIGIN$UPDIRS:\$ORIGIN$UPDIRS/.libs" $FILE
+    patchelf --print-rpath $FILE
+done
+
 
 $PYTHON -m pip install --no-deps --ignore-installed --user dali/python
 

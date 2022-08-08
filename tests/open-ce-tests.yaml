@@ -4,7 +4,7 @@ tests:
         # Get the DALI repo, which contains the tests
         conda install -y git
         DALI_REPO="https://github.com/NVIDIA/DALI"
-        DALI_BRANCH="v1.9.0"
+        DALI_BRANCH="v1.15.0"
         git clone -b ${DALI_BRANCH} ${DALI_REPO}
         # Install git-lfs, which is needed to get test data from DALI_extra
         mkdir git-lfs
@@ -50,14 +50,17 @@ tests:
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
         export OPENCV_IO_ENABLE_JASPER=true
+
+        PYTHON_VER=$(python -c 'import platform; print(platform.python_version())')
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/python${PYTHON_VER}/site-packages/nvidia/dali
         cd DALI/qa/TL0_python-self-test-core
-        ./test_no_setup.sh
+        ./test_nofw.sh
         cd ../../..
         cd DALI/qa/TL0_python-self-test-readers-decoders
-        ./test_no_setup.sh
+        ./test_nofw.sh
         cd ../../..
         cd DALI/qa/TL0_python-self-test-operators
-        ./test_no_setup.sh
+        ./test_nofw.sh
 
         cd ../../dali/test/python
         nosetests --verbose test_dali_tf_plugin.py:TestDaliTfPluginLoadOk
