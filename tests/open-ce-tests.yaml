@@ -2,24 +2,24 @@ tests:
   - name: Setup DALI Tests
     command: |
         # Get the DALI repo, which contains the tests
-        conda install -y git
+        conda install -y git git-lfs
         DALI_REPO="https://github.com/NVIDIA/DALI"
-        DALI_BRANCH="v1.15.0"
+        DALI_BRANCH="v1.16.0"
         git clone -b ${DALI_BRANCH} ${DALI_REPO}
         # Install git-lfs, which is needed to get test data from DALI_extra
-        mkdir git-lfs
-        cd git-lfs
-        ARCH=$(uname -m)
-        if test "${ARCH}" == "x86_64"
-        then
-            ARCH="amd64"
-        fi
+        #        mkdir git-lfs
+        #cd git-lfs
+        #ARCH=$(uname -m)
+        #if test "${ARCH}" == "x86_64"
+        #then
+        #    ARCH="amd64"
+        #fi
 
-        conda install -y wget
-        wget https://github.com/git-lfs/git-lfs/releases/download/v2.11.0/git-lfs-linux-${ARCH}-v2.11.0.tar.gz
-        tar -xvf git-lfs-linux-${ARCH}-v2.11.0.tar.gz
-        PREFIX=. ./install.sh
-        cd ..
+        #conda install -y wget
+        #wget https://github.com/git-lfs/git-lfs/releases/download/v2.11.0/git-lfs-linux-${ARCH}-v2.11.0.tar.gz
+        #tar -xvf git-lfs-linux-${ARCH}-v2.11.0.tar.gz
+        #PREFIX=. ./install.sh
+        #cd ..
 
         # Get the DALI_extra repo, which contains test data
         cd DALI
@@ -27,13 +27,17 @@ tests:
         git apply ${FEEDSTOCK_DIR}/recipe/0302-skip_test_external_source_parallel.patch
         read -r DALI_EXTRA_VERSION < DALI_EXTRA_VERSION
         # skip smudge to avoid download error
-        PATH=$(pwd)/../git-lfs/bin:$PATH git-lfs install --skip-smudge
-        PATH=$(pwd)/../git-lfs/bin:$PATH git clone https://github.com/NVIDIA/DALI_extra
+        #PATH=$(pwd)/../git-lfs/bin:$PATH git-lfs install --skip-smudge
+        #PATH=$(pwd)/../git-lfs/bin:$PATH git clone https://github.com/NVIDIA/DALI_extra
+        git-lfs install --skip-smudge
+        git clone https://github.com/NVIDIA/DALI_extra
         cd DALI_extra
         git fetch origin ${DALI_EXTRA_VERSION}
-        PATH=$(pwd)/../../git-lfs/bin:$PATH git checkout ${DALI_EXTRA_VERSION}
+        #PATH=$(pwd)/../../git-lfs/bin:$PATH git checkout ${DALI_EXTRA_VERSION}
         #download the binary files
-        PATH=$(pwd)/../../git-lfs/bin:$PATH  git-lfs pull
+        #PATH=$(pwd)/../../git-lfs/bin:$PATH  git-lfs pull
+        git checkout ${DALI_EXTRA_VERSION}
+        git-lfs pull
 
         conda install -y scipy scikit-learn numba psutil pillow
         # Install nose for running tests
