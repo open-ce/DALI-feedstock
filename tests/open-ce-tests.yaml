@@ -2,24 +2,10 @@ tests:
   - name: Setup DALI Tests
     command: |
         # Get the DALI repo, which contains the tests
-        conda install -y git
+        conda install -y git git-lfs
         DALI_REPO="https://github.com/NVIDIA/DALI"
-        DALI_BRANCH="v1.9.0"
+        DALI_BRANCH="v1.16.0"
         git clone -b ${DALI_BRANCH} ${DALI_REPO}
-        # Install git-lfs, which is needed to get test data from DALI_extra
-        mkdir git-lfs
-        cd git-lfs
-        ARCH=$(uname -m)
-        if test "${ARCH}" == "x86_64"
-        then
-            ARCH="amd64"
-        fi
-
-        conda install -y wget
-        wget https://github.com/git-lfs/git-lfs/releases/download/v2.11.0/git-lfs-linux-${ARCH}-v2.11.0.tar.gz
-        tar -xvf git-lfs-linux-${ARCH}-v2.11.0.tar.gz
-        PREFIX=. ./install.sh
-        cd ..
 
         # Get the DALI_extra repo, which contains test data
         cd DALI
@@ -27,14 +13,14 @@ tests:
         git apply ${FEEDSTOCK_DIR}/recipe/0302-skip_test_external_source_parallel.patch
         read -r DALI_EXTRA_VERSION < DALI_EXTRA_VERSION
         # skip smudge to avoid download error
-        PATH=$(pwd)/../git-lfs/bin:$PATH git-lfs install --skip-smudge
-        PATH=$(pwd)/../git-lfs/bin:$PATH git clone https://github.com/NVIDIA/DALI_extra
+        git-lfs install --skip-smudge
+        git clone https://github.com/NVIDIA/DALI_extra
         cd DALI_extra
         git fetch origin ${DALI_EXTRA_VERSION}
-        PATH=$(pwd)/../../git-lfs/bin:$PATH git checkout ${DALI_EXTRA_VERSION}
         #download the binary files
-        PATH=$(pwd)/../../git-lfs/bin:$PATH  git-lfs pull
-
+        git checkout ${DALI_EXTRA_VERSION}
+        git-lfs pull
+        cd ..
         conda install -y scipy scikit-learn numba psutil pillow
         # Install nose for running tests
         pip install nose librosa
@@ -50,14 +36,17 @@ tests:
         # Run python tests
         export DALI_EXTRA_PATH=$(pwd)/DALI/DALI_extra
         export OPENCV_IO_ENABLE_JASPER=true
+
+        PYTHON_VER=$(python -c 'import platform; print(platform.python_version())')
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/python${PYTHON_VER}/site-packages/nvidia/dali
         cd DALI/qa/TL0_python-self-test-core
-        ./test_no_setup.sh
+        ./test_nofw.sh
         cd ../../..
         cd DALI/qa/TL0_python-self-test-readers-decoders
-        ./test_no_setup.sh
+        ./test_nofw.sh
         cd ../../..
         cd DALI/qa/TL0_python-self-test-operators
-        ./test_no_setup.sh
+        ./test_nofw.sh
 
         cd ../../dali/test/python
         nosetests --verbose test_dali_tf_plugin.py:TestDaliTfPluginLoadOk
