@@ -4,7 +4,7 @@ tests:
         # Get the DALI repo, which contains the tests
         conda install -y git git-lfs
         DALI_REPO="https://github.com/NVIDIA/DALI"
-        DALI_BRANCH="v1.16.0"
+        DALI_BRANCH="v1.16.1"
         git clone -b ${DALI_BRANCH} ${DALI_REPO}
 
         # Get the DALI_extra repo, which contains test data
