@@ -1,4 +1,4 @@
-{% set build_version = "1.16.1" %}
+{% set build_version = "1.19.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -54,7 +54,8 @@ outputs:
         - libtiff {{ libtiff }}
         - libvorbis {{ libvorbis }}
         - zlib {{ zlib }}
-        - openh264 2.1.0 
+        - openh264 2.1.0
+        - jpeg-turbo {{ jpegturbo }}
       run:
         - python {{ python }}
         - future {{ future }}

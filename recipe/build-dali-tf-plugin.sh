@@ -40,14 +40,14 @@ if [[ $PY_VER < '3.8' ]]; then
 fi
 
 # Add libjpeg-turbo location to front of CXXFLAGS so it is used instead of jpeg
-export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC"
+export CXXFLAGS="-I$PREFIX/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC"
 
 export PYTHONUSERBASE=$PREFIX
 
 #$PYTHON -m pip install --no-deps --ignore-installed --user dali/python
 
 # Build tensorflow plugin
-export LD_LIBRARY_PATH="$PREFIX/libjpeg-turbo/lib:$PREFIX/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 DALI_PATH=$($PYTHON -c 'import nvidia.dali as dali; import os; print(os.path.dirname(dali.__file__))')
 echo "DALI_PATH is ${DALI_PATH}"
 pushd $SRC_DIR/dali_tf_plugin/
