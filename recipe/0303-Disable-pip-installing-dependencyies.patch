@@ -1,0 +1,47 @@
+From 9e7aefddab9dd1a5d936a1f6ceab05277a8b157a Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 17 Nov 2022 01:48:42 -0500
+Subject: [PATCH] Disable pip installing dependencyies
+
+---
+ qa/TL0_python-self-test-core/test_nofw.sh             | 2 +-
+ qa/TL0_python-self-test-operators/test_nofw.sh        | 2 +-
+ qa/TL0_python-self-test-readers-decoders/test_nofw.sh | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/qa/TL0_python-self-test-core/test_nofw.sh b/qa/TL0_python-self-test-core/test_nofw.sh
+index 4d572c95..9c2507bc 100755
+--- a/qa/TL0_python-self-test-core/test_nofw.sh
++++ b/qa/TL0_python-self-test-core/test_nofw.sh
+@@ -12,5 +12,5 @@ test_body() {
+ }
+ 
+ pushd ../..
+-source ./qa/test_template.sh
++#source ./qa/test_template.sh
+ popd
+diff --git a/qa/TL0_python-self-test-operators/test_nofw.sh b/qa/TL0_python-self-test-operators/test_nofw.sh
+index 9f9c56b2..08497ac9 100755
+--- a/qa/TL0_python-self-test-operators/test_nofw.sh
++++ b/qa/TL0_python-self-test-operators/test_nofw.sh
+@@ -12,5 +12,5 @@ test_body() {
+ }
+ 
+ pushd ../..
+-source ./qa/test_template.sh
++#source ./qa/test_template.sh
+ popd
+diff --git a/qa/TL0_python-self-test-readers-decoders/test_nofw.sh b/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
+index 3a45e8d0..eb03183e 100755
+--- a/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
++++ b/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
+@@ -12,5 +12,5 @@ test_body() {
+ }
+ 
+ pushd ../..
+-source ./qa/test_template.sh
++#source ./qa/test_template.sh
+ popd
+-- 
+2.23.0
+
