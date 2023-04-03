@@ -1,15 +1,14 @@
-From a89da6e294e8b65707e633a17f4e21d5d5963a0c Mon Sep 17 00:00:00 2001
-From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Mon, 27 Jun 2022 09:46:34 +0000
-Subject: [PATCH] Fixed errors with GCC11
+From c209731d9749972e1329d6903af8e12e26843a8b Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23in.ibm.com>
+Date: Mon, 3 Apr 2023 10:09:47 +0000
+Subject: [PATCH]  Fixed errors with GCC11
 
 ---
  dali/pipeline/executor/executor_test.cc | 12 ++++++------
- include/dali/core/convert.h             |  2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/dali/pipeline/executor/executor_test.cc b/dali/pipeline/executor/executor_test.cc
-index d914054f..2c7aaaeb 100644
+index e8ad2513..65ada836 100644
 --- a/dali/pipeline/executor/executor_test.cc
 +++ b/dali/pipeline/executor/executor_test.cc
 @@ -365,24 +365,24 @@ TYPED_TEST(ExecutorTest, DISABLED_TestDataSetup) {
@@ -21,7 +20,7 @@ index d914054f..2c7aaaeb 100644
  
      auto mixed_workspaces = this->MixedData(exe.get(), i);
      ASSERT_EQ(mixed_workspaces.size(), 1);
-     MixedWorkspace &mws = mixed_workspaces[0];
+     Workspace &mws = mixed_workspaces[0];
      ASSERT_EQ(mws.NumInput(), 1);
 -    ASSERT_EQ(mws.GetInputBatchSize(0), this->batch_size_);
 -    ASSERT_TRUE(mws.InputIsType<CPUBackend>(0));
@@ -33,7 +32,7 @@ index d914054f..2c7aaaeb 100644
  
      auto device_workspaces = this->GPUData(exe.get(), i);
      ASSERT_EQ(device_workspaces.size(), 1);
-     DeviceWorkspace &dws = device_workspaces[0];
+     Workspace &dws = device_workspaces[0];
      ASSERT_EQ(dws.NumInput(), 1);
 -    ASSERT_TRUE(dws.InputIsType<GPUBackend>(0));
 +    //ASSERT_TRUE(dws.InputIsType<GPUBackend>(0));
@@ -43,19 +42,6 @@ index d914054f..2c7aaaeb 100644
    }
  }
  
-diff --git a/include/dali/core/convert.h b/include/dali/core/convert.h
-index d0786e15..f3795d71 100644
---- a/include/dali/core/convert.h
-+++ b/include/dali/core/convert.h
-@@ -118,7 +118,7 @@ DALI_HOST_DEV constexpr std::enable_if_t<
-     needs_clamp<U, T>::value && std::is_unsigned<U>::value,
-     T>
- clamp(U value, ret_type<T>) {
--  return value >= max_value<T>() ? max_value<T>() : static_cast<T>(value);
-+  return static_cast<T>(value) >= max_value<T>() ? max_value<T>() : static_cast<T>(value);
- }
- 
- template <typename T, typename U>
 -- 
 2.34.1
 
