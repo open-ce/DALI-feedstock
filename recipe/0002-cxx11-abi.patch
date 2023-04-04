@@ -1,6 +1,6 @@
-From 9a19dd452f2472f1a714fa791e90f82356444ef3 Mon Sep 17 00:00:00 2001
-From: Nishidha Panpaliya <npanpa23@in.ibm.com>
-Date: Mon, 7 Nov 2022 07:06:48 -0500
+From 428be47fa2f72bd7676ff3e05b81ff47db97ae7e Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23in.ibm.com>
+Date: Mon, 3 Apr 2023 08:43:35 +0000
 Subject: [PATCH] Update cxx flags to use CXX11 abi
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH] Update cxx flags to use CXX11 abi
  2 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 170e5cc1..37cd8d96 100644
+index c745fe15..249515bc 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -172,6 +172,8 @@ else()
+@@ -184,6 +184,8 @@ else()
    set(LIBTYPE SHARED)
  endif()
  
@@ -21,12 +21,12 @@ index 170e5cc1..37cd8d96 100644
  get_dali_version(${PROJECT_SOURCE_DIR}/VERSION DALI_VERSION)
  
  get_dali_extra_version(${PROJECT_SOURCE_DIR}/DALI_EXTRA_VERSION DALI_EXTRA_VERSION)
-@@ -250,7 +252,7 @@ set(CMAKE_CUDA_STANDARD 14)
+@@ -267,7 +269,7 @@ set(CMAKE_CUDA_STANDARD 17)
  set(CMAKE_CUDA_STANDARD_REQUIRED ON)
  
  # CXX flags
--set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-free-nonheap-object -Wno-unused-variable -Wno-unused-function -fno-strict-aliasing -fPIC -fvisibility=hidden")
-+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-free-nonheap-object -Wno-unused-variable -Wno-unused-function -fno-strict-aliasing -fPIC -fvisibility=hidden -DGLIBCXX_USE_CXX11_ABI=1")
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-free-nonheap-object -Wno-unused-variable -Wno-unused-function -Wno-strict-overflow -fno-strict-aliasing -fPIC -fvisibility=hidden")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-free-nonheap-object -Wno-unused-variable -Wno-unused-function -Wno-strict-overflow -fno-strict-aliasing -fPIC -fvisibility=hidden -DGLIBCXX_USE_CXX11_ABI=1")
  
  if (WERROR)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
@@ -44,5 +44,5 @@ index 35a3da83..2cdf6a59 100644
      if dali_include_flags == '' and dali_cflags == '' and dali_lflags == '':
          raise ImportError('Could not find DALI.')
 -- 
-2.23.0
+2.34.1
 

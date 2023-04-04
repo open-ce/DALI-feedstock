@@ -1,4 +1,4 @@
-{% set build_version = "1.21.0" %}
+{% set build_version = "1.24.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -33,7 +33,7 @@ outputs:
         - make
         - cudatoolkit {{ cudatoolkit }}
         - protobuf {{ protobuf }}
-        - libprotobuf-static {{ protobuf }}
+        - libprotobuf-static {{ libprotobuf }}
         - jpeg-turbo {{ jpegturbo }}
         - dali-ffmpeg
         - python {{ python }}
@@ -56,6 +56,7 @@ outputs:
         - zlib {{ zlib }}
         - openh264 2.1.0
         - jpeg-turbo {{ jpegturbo }}
+        - cfitsio
       run:
         - python {{ python }}
         - future {{ future }}
@@ -75,14 +76,14 @@ outputs:
       build:
         - gcc_linux-{{ arch }} {{ dali_tf_plugin_compiler }}   #[cudatoolkit == '11.2']
         - gxx_linux-{{ arch }} {{ dali_tf_plugin_compiler }}   #[cudatoolkit == '11.2']
-        - {{ compiler('c') }}                                  #[cudatoolkit == '11.4']
-        - {{ compiler('cxx') }}                                #[cudatoolkit == '11.4']
+        - {{ compiler('c') }}                                  #[cudatoolkit == '11.8']
+        - {{ compiler('cxx') }}                                #[cudatoolkit == '11.8']
         - pkg-config {{ pkg_config }}
         - cmake {{ cmake }}
         - make
         - cudatoolkit {{ cudatoolkit }}
         - protobuf {{ protobuf }}
-        - libprotobuf-static {{ protobuf }}
+        - libprotobuf-static {{ libprotobuf }}
         - jpeg-turbo {{ jpegturbo }}
         - dali-ffmpeg
         - python {{ python }}
