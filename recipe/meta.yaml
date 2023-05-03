@@ -1,4 +1,4 @@
-{% set build_version = "1.24.0" %}
+{% set build_version = "1.25.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
