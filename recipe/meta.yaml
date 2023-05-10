@@ -78,7 +78,7 @@ outputs:
         - gxx_linux-{{ arch }} {{ dali_tf_plugin_compiler }}   #[cudatoolkit == '11.2']
         - {{ compiler('c') }}                                  #[cudatoolkit == '11.8']
         - {{ compiler('cxx') }}                                #[cudatoolkit == '11.8']
-        - pkg-config {{ pkg_config }}
+        - pkg-config {{ pkgconfig }}
         - cmake {{ cmake }}
         - make
         - cudatoolkit {{ cudatoolkit }}
