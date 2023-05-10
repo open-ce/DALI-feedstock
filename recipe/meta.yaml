@@ -16,7 +16,7 @@ source:
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
 
 build:
-  number: 2
+  number: 3
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
