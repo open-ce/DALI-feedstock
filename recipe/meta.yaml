@@ -34,14 +34,14 @@ outputs:
         - protobuf {{ protobuf }}
         - libprotobuf-static {{ protobuf }}
         - jpeg-turbo {{ jpegturbo }}
-        - ffmpeg {{ ffmpeg }}
+        - ffmpeg =={{ ffmpeg }}
         - python {{ python }}
         - lmdb {{ lmdb }}
         - libsndfile
         - libtar {{ libtar }}
         - python-clang {{ clang }}
       host:
-        - opencv {{ opencv }}
+        - opencv ==4.5.5
         - libboost {{ boost }}
         - tensorflow {{ tensorflow }}
         - python {{ python }}
@@ -55,7 +55,7 @@ outputs:
         - future {{ future }}
         - tensorflow {{ tensorflow }}
         - cudatoolkit {{ cudatoolkit }}
-        - opencv {{ opencv }}
+        - opencv ==4.5.5
         - jpeg-turbo {{ jpegturbo }}
         - lmdb                            # versioning handled by run_exports
         - libsndfile
@@ -76,7 +76,7 @@ outputs:
         - protobuf {{ protobuf }}
         - libprotobuf-static {{ protobuf }}
         - jpeg-turbo {{ jpegturbo }}
-        - ffmpeg {{ ffmpeg }}
+        - ffmpeg =={{ ffmpeg }}
         - python {{ python }}
         - lmdb {{ lmdb }}
         - libsndfile
@@ -90,7 +90,7 @@ outputs:
         - future {{ future }}
         - tensorflow {{ tensorflow }}
         - cudatoolkit {{ cudatoolkit }}
-        - opencv {{ opencv }}
+        - opencv ==4.5.5
         - jpeg-turbo {{ jpegturbo }}
         - lmdb                            # versioning handled by run_exports
         - libsndfile
