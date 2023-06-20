@@ -1,4 +1,4 @@
-{% set build_version = "1.25.0" %}
+{% set build_version = "1.26.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -16,7 +16,7 @@ source:
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
 
 build:
-  number: 3
+  number: 1
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
