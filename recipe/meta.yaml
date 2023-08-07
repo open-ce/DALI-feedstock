@@ -1,4 +1,4 @@
-{% set build_version = "1.26.0" %}
+{% set build_version = "1.28.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -14,6 +14,7 @@ source:
     - 0002-cxx11-abi.patch
     - 0101-Fixed-cmake-error.patch        #[x86_64]
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
+    - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
 build:
   number: 1
@@ -74,10 +75,8 @@ outputs:
     script: build-dali-tf-plugin.sh
     requirements:
       build:
-        - gcc_linux-{{ arch }} {{ dali_tf_plugin_compiler }}   #[cudatoolkit == '11.2']
-        - gxx_linux-{{ arch }} {{ dali_tf_plugin_compiler }}   #[cudatoolkit == '11.2']
-        - {{ compiler('c') }}                                  #[cudatoolkit == '11.8']
-        - {{ compiler('cxx') }}                                #[cudatoolkit == '11.8']
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - pkg-config {{ pkgconfig }}
         - cmake {{ cmake }}
         - make
