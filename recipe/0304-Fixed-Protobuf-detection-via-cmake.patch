@@ -16,7 +16,7 @@ index ccb88599..134832fe 100644
    # deliberatelly use protobuf instead of Protobuf to use protobuf provided cmake configuration file
    # then use Protobuf to utilize our FindProtobuf.cmake to discover the rest
 -  find_package(protobuf REQUIRED CONFIG)
-+  find_package(protobuf REQUIRED)
++  find_package(Protobuf REQUIRED)
    find_package(Protobuf 2.0 REQUIRED)
    if(${Protobuf_VERSION} VERSION_LESS "3.0")
      message(STATUS "TensorFlow TFRecord file format support is not available with Protobuf 2")
