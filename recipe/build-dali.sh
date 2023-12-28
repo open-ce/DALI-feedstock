@@ -78,6 +78,7 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DBUILD_LIBSND=${BUILD_LIBSND:-ON}                  \
       -DBUILD_NVML=${BUILD_NVML:-ON}                      \
       -DBUILD_FFTS=${BUILD_FFTS:-ON}                      \
+      -DBUILD_CVCUDA=${BUILD_CVCUDA:-ON}                  \
       -DVERBOSE_LOGS=${VERBOSE_LOGS:-OFF}                 \
       -DWERROR=${WERROR:-ON}                              \
       -DBUILD_WITH_ASAN=${BUILD_WITH_ASAN:-OFF}           \

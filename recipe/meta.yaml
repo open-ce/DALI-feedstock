@@ -1,4 +1,4 @@
-{% set build_version = "1.28.0" %}
+{% set build_version = "1.32.0" %}
 {% set arch = "ppc64le" %}    #[ppc64le]
 {% set arch = "64" %}    #[x86_64]
 
@@ -12,7 +12,6 @@ source:
   git_rev: v{{ build_version }}
   patches:
     - 0002-cxx11-abi.patch
-    - 0101-Fixed-cmake-error.patch        #[x86_64]
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
@@ -44,6 +43,12 @@ outputs:
         - python-clang {{ clang }}
         - zlib {{ zlib }}
         - openh264 2.1.0
+        - dm-tree >=0.1.8
+        - git-lfs
+        - gast >=0.3.3
+        - astunparse >=1.6.0
+        - patchelf
+        - black =23.11.0
       host:
         - opencv {{ opencv }}
         - libboost {{ boost }}
@@ -58,6 +63,10 @@ outputs:
         - openh264 2.1.0
         - jpeg-turbo {{ jpegturbo }}
         - cfitsio
+        - dm-tree >=0.1.8
+        - git-lfs
+        - gast >=0.3.3
+        - astunparse >=1.6.0
       run:
         - python {{ python }}
         - future {{ future }}
@@ -70,6 +79,10 @@ outputs:
         - libtiff                         # versioning handled by run_exports
         - libvorbis                       # versioning handled by run_exports
         - libtar {{ libtar }}
+        - dm-tree >=0.1.8
+        - git-lfs
+        - gast >=0.3.3
+        - astunparse >=1.6.0
 
   - name: dali-tf-plugin
     script: build-dali-tf-plugin.sh
