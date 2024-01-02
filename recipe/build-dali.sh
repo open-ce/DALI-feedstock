@@ -42,6 +42,11 @@ fi
 # Add libjpeg-turbo location to front of CXXFLAGS so it is used instead of jpeg
 export CXXFLAGS="-I$CONDA_PREFIX/libjpeg-turbo/include -I${PYTHON_INCLUDE_DIR} ${CXXFLAGS} -DNO_ALIGNED_ALLOC -Wno-error=free-nonheap-object -Wno-error=maybe-uninitialized -fplt"
 
+cd third_party/cvcuda
+git lfs install
+git lfs pull
+cd ../..
+
 # Create build directory for cmake and enter it
 mkdir $SRC_DIR/build
 cd $SRC_DIR/build
