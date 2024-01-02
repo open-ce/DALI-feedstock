@@ -44,8 +44,7 @@ outputs:
         - zlib {{ zlib }}
         - openh264 2.1.0
         - dm-tree >=0.1.8
-        - git-lfs
-        - gast >=0.3.3
+        - gast {{ gast }}
         - astunparse >=1.6.0
         - patchelf
         - black =23.11.0
@@ -64,8 +63,7 @@ outputs:
         - jpeg-turbo {{ jpegturbo }}
         - cfitsio
         - dm-tree >=0.1.8
-        - git-lfs
-        - gast >=0.3.3
+        - gast {{ gast }}
         - astunparse >=1.6.0
       run:
         - python {{ python }}
@@ -80,8 +78,7 @@ outputs:
         - libvorbis                       # versioning handled by run_exports
         - libtar {{ libtar }}
         - dm-tree >=0.1.8
-        - git-lfs
-        - gast >=0.3.3
+        - gast {{ gast }}
         - astunparse >=1.6.0
 
   - name: dali-tf-plugin

@@ -67,9 +67,11 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DBUILD_BENCHMARK=${BUILD_BENCHMARK:-ON}            \
       -DBUILD_NVTX=${BUILD_NVTX:-OFF}                     \
       -DBUILD_PYTHON=${BUILD_PYTHON:-ON}                  \
+      -DPYTHON_STUBGEN_INTERPRETER=${PYTHON}              \
       -DBUILD_JPEG_TURBO=${BUILD_JPEG_TURBO:-ON}          \
       -DBUILD_NVJPEG=${BUILD_NVJPEG:-ON}                  \
       -DBUILD_OPENCV=${BUILD_OPENCV:-ON}                  \
+      -DBUILD_CVCUDA=${BUILD_CVCUDA:-ON}                  \
       -DBUILD_PROTOBUF=${BUILD_PROTOBUF:-ON}              \
       -DBUILD_NVJPEG2K=${BUILD_NVJPEG2K}                  \
       -DBUILD_LIBTIFF=${BUILD_LIBTIFF:-ON}                \
@@ -78,7 +80,6 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       -DBUILD_LIBSND=${BUILD_LIBSND:-ON}                  \
       -DBUILD_NVML=${BUILD_NVML:-ON}                      \
       -DBUILD_FFTS=${BUILD_FFTS:-ON}                      \
-      -DBUILD_CVCUDA=${BUILD_CVCUDA:-ON}                  \
       -DVERBOSE_LOGS=${VERBOSE_LOGS:-OFF}                 \
       -DWERROR=${WERROR:-ON}                              \
       -DBUILD_WITH_ASAN=${BUILD_WITH_ASAN:-OFF}           \
@@ -89,6 +90,9 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       ..
 
 make -j"$(nproc --all)" install
+#libs created by cvcuda not getting installed to PREFIX
+cp $SRC_DIR/build/lib/libcv* $PREFIX/lib
+cp $SRC_DIR/build/lib/libnvcv_types* $PREFIX/lib
 
 export PYTHONUSERBASE=$PREFIX
 
