@@ -1,0 +1,25 @@
+From 2694f7c399ab18cf3fd73bbe3675a1df18401660 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Mon, 7 Aug 2023 16:08:59 +0000
+Subject: [PATCH] Fixed Protobuf detection via cmake
+
+---
+ cmake/Dependencies.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/Dependencies.cmake b/cmake/Dependencies.cmake
+index ccb88599..134832fe 100644
+--- a/cmake/Dependencies.cmake
++++ b/cmake/Dependencies.cmake
+@@ -117,7 +117,7 @@ if (BUILD_PROTOBUF)
+   endif(NOT DEFINED Protobuf_USE_STATIC_LIBS)
+   # deliberatelly use protobuf instead of Protobuf to use protobuf provided cmake configuration file
+   # then use Protobuf to utilize our FindProtobuf.cmake to discover the rest
+-  find_package(protobuf REQUIRED CONFIG)
++  find_package(Protobuf REQUIRED)
+   find_package(Protobuf 2.0 REQUIRED)
+   if(${Protobuf_VERSION} VERSION_LESS "3.0")
+     message(STATUS "TensorFlow TFRecord file format support is not available with Protobuf 2")
+-- 
+2.40.1
+

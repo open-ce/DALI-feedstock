@@ -22,8 +22,8 @@ build:
     - CUDA_HOME
 
 outputs:
-  - name: dali
-    script: build-dali.sh
+  - name: dali-tf-plugin
+    script: build-dali-tf-plugin.sh
     requirements:
       build:
         - {{ compiler('c') }}
@@ -39,32 +39,16 @@ outputs:
         - python {{ python }}
         - lmdb {{ lmdb }}
         - libsndfile
-        - libtar {{ libtar }}
         - python-clang {{ clang }}
-        - zlib {{ zlib }}
-        - openh264 2.1.0
-        - dm-tree >=0.1.8
-        - gast {{ gast }}
-        - astunparse >=1.6.0
-        - patchelf
-        - black =23.11.0
+        - libtar {{ libtar }}
+        - setuptools {{ setuptools }}
+        - ml_dtypes {{ ml_dtypes }}
       host:
-        - opencv {{ opencv }}
-        - libboost {{ boost }}
-        - tensorflow {{ tensorflow }}
+        - dali
         - python {{ python }}
-        - patchelf
-        - future {{ future }}
-        - lmdb {{ lmdb }}
-        - libtiff {{ libtiff }}
-        - libvorbis {{ libvorbis }}
-        - zlib {{ zlib }}
-        - openh264 2.1.0
-        - jpeg-turbo {{ jpegturbo }}
-        - cfitsio
-        - dm-tree >=0.1.8
-        - gast {{ gast }}
-        - astunparse >=1.6.0
+        - setuptools {{ setuptools }}
+        - dali-ffmpeg
+        - ml_dtypes {{ ml_dtypes }}
       run:
         - python {{ python }}
         - future {{ future }}
@@ -76,11 +60,9 @@ outputs:
         - libsndfile
         - libtiff                         # versioning handled by run_exports
         - libvorbis                       # versioning handled by run_exports
-        - libtar {{ libtar }}
-        - dm-tree >=0.1.8
-        - gast {{ gast }}
-        - astunparse >=1.6.0
-
+        - dali
+        - ml_dtypes {{ ml_dtypes }}
+      
 about:
   home: https://github.com/NVIDIA/DALI
   license: Apache-2.0

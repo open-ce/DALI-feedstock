@@ -1,0 +1,25 @@
+From 9873e3626f9a496ebad1a60f8f872327bbb207b3 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Tue, 15 Nov 2022 00:45:37 -0500
+Subject: [PATCH] skip test_external_source_parallel
+
+---
+ qa/TL0_python-self-test-readers-decoders/test_body.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/qa/TL0_python-self-test-readers-decoders/test_body.sh b/qa/TL0_python-self-test-readers-decoders/test_body.sh
+index ab8d8b66..87be7e21 100644
+--- a/qa/TL0_python-self-test-readers-decoders/test_body.sh
++++ b/qa/TL0_python-self-test-readers-decoders/test_body.sh
+@@ -11,7 +11,7 @@ test_py_with_framework() {
+     for test_script in $(ls test_external_source_dali.py test_external_source_numpy.py \
+       test_external_source_parallel_garbage_collection_order.py \
+       test_external_source_parallel_custom_serialization.py \
+-      test_pool.py test_external_source_parallel.py test_external_source_parallel_shared_batch.py \
++      test_pool.py test_external_source_parallel.py \
+       test_external_source_parallel_large_sample.py \
+       | sed "/$FILTER_PATTERN/d"); do
+         ${python_invoke_test} --attr '!slow,!pytorch,!mxnet,!cupy,!numba' ${test_script}
+-- 
+2.23.0
+

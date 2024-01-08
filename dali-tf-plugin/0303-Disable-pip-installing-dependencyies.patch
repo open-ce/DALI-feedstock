@@ -1,0 +1,114 @@
+From f273e5bf0bf68015f3450031f98ea27c010cbbbf Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 5 Jan 2023 03:24:18 -0500
+Subject: [PATCH] Disable pip packages
+
+---
+ qa/TL0_python-self-test-core/test_nofw.sh     | 18 ++++++++++++++++--
+ .../test_nofw.sh                              | 19 +++++++++++++++++--
+ .../test_nofw.sh                              | 18 ++++++++++++++++--
+ 3 files changed, 49 insertions(+), 6 deletions(-)
+
+diff --git a/qa/TL0_python-self-test-core/test_nofw.sh b/qa/TL0_python-self-test-core/test_nofw.sh
+index c0ea8d41..19b5c4e6 100755
+--- a/qa/TL0_python-self-test-core/test_nofw.sh
++++ b/qa/TL0_python-self-test-core/test_nofw.sh
+@@ -5,12 +5,26 @@ pip_packages='${python_test_runner_package} numpy>=1.17 opencv-python pillow nvi
+ target_dir=./dali/test/python
+ 
+ # test_body definition is in separate file so it can be used without setup
+-source test_body.sh
++source ./test_body.sh
+ 
+ test_body() {
+   test_no_fw
+ }
+ 
++python_test_runner_package="nose nose2"
++python_test_runner="python -m nose"
++python_test_args="--verbose -s"
++python_invoke_test="${python_test_runner} ${python_test_args}"
++
++# New framework for Python Tests
++# During the transition we run both
++# When all tests are ported old will be removed
++python_new_test_runner="python -m nose2"
++python_new_test_args="--verbose"
++python_new_invoke_test="${python_new_test_runner} ${python_new_test_args}"
++
+ pushd ../..
+-source ./qa/test_template.sh
++cd ${target_dir}
++test_body
++#source ./qa/test_template.sh
+ popd
+diff --git a/qa/TL0_python-self-test-operators/test_nofw.sh b/qa/TL0_python-self-test-operators/test_nofw.sh
+index eeea4a6e..dd040c64 100755
+--- a/qa/TL0_python-self-test-operators/test_nofw.sh
++++ b/qa/TL0_python-self-test-operators/test_nofw.sh
+@@ -5,12 +5,27 @@ pip_packages='${python_test_runner_package} dataclasses numpy>=1.17 opencv-pytho
+ target_dir=./dali/test/python
+ 
+ # test_body definition is in separate file so it can be used without setup
+-source test_body.sh
++source ./test_body.sh
+ 
+ test_body() {
+   test_no_fw
+ }
+ 
++python_test_runner_package="nose nose2"
++python_test_runner="python -m nose"
++python_test_args="--verbose -s"
++python_invoke_test="${python_test_runner} ${python_test_args}"
++
++# New framework for Python Tests
++# During the transition we run both
++# When all tests are ported old will be removed
++python_new_test_runner="python -m nose2"
++python_new_test_args="--verbose"
++python_new_invoke_test="${python_new_test_runner} ${python_new_test_args}"
++
+ pushd ../..
+-source ./qa/test_template.sh
++cd ${target_dir}
++test_body
++
++#source ./qa/test_template.sh
+ popd
+diff --git a/qa/TL0_python-self-test-readers-decoders/test_nofw.sh b/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
+index 3a45e8d0..de34379f 100755
+--- a/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
++++ b/qa/TL0_python-self-test-readers-decoders/test_nofw.sh
+@@ -5,12 +5,26 @@ pip_packages='${python_test_runner_package} numpy>=1.17 librosa==0.8.1 scipy nvi
+ target_dir=./dali/test/python
+ 
+ # test_body definition is in separate file so it can be used without setup
+-source test_body.sh
++source ./test_body.sh
+ 
+ test_body() {
+   test_no_fw
+ }
+ 
++python_test_runner_package="nose nose2"
++python_test_runner="python -m nose"
++python_test_args="--verbose -s"
++python_invoke_test="${python_test_runner} ${python_test_args}"
++
++# New framework for Python Tests
++# During the transition we run both
++# When all tests are ported old will be removed
++python_new_test_runner="python -m nose2"
++python_new_test_args="--verbose"
++python_new_invoke_test="${python_new_test_runner} ${python_new_test_args}"
++
+ pushd ../..
+-source ./qa/test_template.sh
++cd ${target_dir}
++test_body
++#source ./qa/test_template.sh
+ popd
+-- 
+2.23.0
+
