@@ -2,6 +2,8 @@ recipes:
 {% if build_type == "cuda" %}
   - name: DALI
     path: recipe
+  - name: dali-tf-plugin
+    path: dali-tf-plugin
   - name: dali-ffmpeg
     path: ffmpeg
 {% endif %}
