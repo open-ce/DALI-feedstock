@@ -22,6 +22,7 @@ if [ ${ARCH} = "x86_64" ]; then
     ARCH_LONGNAME="x86_64-conda"
 elif [ ${ARCH} = "ppc64le" ]; then
     ARCH_LONGNAME="powerpc64le-conda"
+    export BUILD_CVCUDA=OFF
 else
     echo "Error: Unsupported Architecture. Expected: [x86_64|ppc64le] Actual: ${ARCH}"
     exit 1
@@ -95,9 +96,13 @@ cmake -DBUILD_LMDB=${BUILD_LMDB:-ON}                      \
       ..
 
 make -j"$(nproc --all)" install
-#libs created by cvcuda not getting installed to PREFIX
-cp $SRC_DIR/build/lib/libcv* $PREFIX/lib
-cp $SRC_DIR/build/lib/libnvcv_types* $PREFIX/lib
+
+#Copy for x86 alone, as cv-cuda is disabled for ppc.
+if [ ${ARCH} = "x86_64" ]; then
+  #libs created by cvcuda not getting installed to PREFIX
+  cp $SRC_DIR/build/lib/libcv* $PREFIX/lib
+  cp $SRC_DIR/build/lib/libnvcv_types* $PREFIX/lib
+fi
 
 export PYTHONUSERBASE=$PREFIX
 
