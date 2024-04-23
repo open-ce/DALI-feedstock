@@ -11,13 +11,13 @@ source:
   git_url: https://github.com/NVIDIA/DALI/
   git_rev: v{{ build_version }}
   patches:
-    - 0001-fix-build-by-adding-call-to-find_package-for-CUDA.patch
+    - 0001-fix-build-by-adding-call-to-find_package-for-CUDA.patch     #[x86_64]
     - 0002-cxx11-abi.patch
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -48,7 +48,7 @@ outputs:
         - gast {{ gast }}
         - astunparse >=1.6.0
         - patchelf
-        - black =23.11.0
+        - black =23.10.0
       host:
         - opencv {{ opencv }}
         - libboost {{ boost }}
