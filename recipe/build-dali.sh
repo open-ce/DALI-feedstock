@@ -16,10 +16,14 @@
 # *****************************************************************
 
 # Determine Architecture
+set -ex
 
 ARCH="$(arch)"
 if [ ${ARCH} = "x86_64" ]; then
     ARCH_LONGNAME="x86_64-conda"
+    if [[ ${cudatoolkit} == "11.8" ]]; then
+        export BUILD_CVCUDA=OFF
+    fi
 elif [ ${ARCH} = "ppc64le" ]; then
     ARCH_LONGNAME="powerpc64le-conda"
     export BUILD_CVCUDA=OFF
@@ -99,9 +103,11 @@ make -j"$(nproc --all)" install
 
 #Copy for x86 alone, as cv-cuda is disabled for ppc.
 if [ ${ARCH} = "x86_64" ]; then
-  #libs created by cvcuda not getting installed to PREFIX
-  cp $SRC_DIR/build/lib/libcv* $PREFIX/lib
-  cp $SRC_DIR/build/lib/libnvcv_types* $PREFIX/lib
+  if [[ ${cudatoolkit} != "11.8" ]]; then
+      #libs created by cvcuda not getting installed to PREFIX
+      cp $SRC_DIR/build/lib/libcv* $PREFIX/lib
+      cp $SRC_DIR/build/lib/libnvcv_types* $PREFIX/lib
+  fi
 fi
 
 export PYTHONUSERBASE=$PREFIX
