@@ -32,7 +32,6 @@ else
     exit 1
 fi
 
-echo $BUILD_CVCUDA
 # Create 'gcc' symlink so nvcc can find it
 ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-gcc $CONDA_PREFIX/bin/gcc
 ln -s $CONDA_PREFIX/bin/${ARCH_LONGNAME}-linux-gnu-g++ $CONDA_PREFIX/bin/g++
