@@ -17,7 +17,7 @@ source:
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
 build:
-  number: 3
+  number: 4
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -50,6 +50,7 @@ outputs:
         - patchelf
         - black =23.10.0
       host:
+        - cudatoolkit {{ cudatoolkit }}
         - opencv {{ opencv }}
         - libboost {{ boost }}
         - tensorflow {{ tensorflow }}
