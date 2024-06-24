@@ -16,7 +16,7 @@ source:
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -31,7 +31,7 @@ outputs:
         - pkg-config {{ pkgconfig }}
         - cmake {{ cmake }}
         - make
-        - cudatoolkit {{ cudatoolkit }}
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - protobuf {{ protobuf }}
         - libprotobuf-static {{ libprotobuf }}
         - jpeg-turbo {{ jpegturbo }}
@@ -44,6 +44,7 @@ outputs:
         - setuptools {{ setuptools }}
         - ml_dtypes {{ ml_dtypes }}
       host:
+        - cudatoolkit {{ cudatoolkit }}    #[build_type == 'cuda']
         - dali
         - python {{ python }}
         - setuptools {{ setuptools }}
@@ -53,7 +54,7 @@ outputs:
         - python {{ python }}
         - future {{ future }}
         - tensorflow {{ tensorflow }}
-        - cudatoolkit {{ cudatoolkit }}
+        - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - opencv {{ opencv }}
         - jpeg-turbo {{ jpegturbo }}
         - lmdb                            # versioning handled by run_exports
