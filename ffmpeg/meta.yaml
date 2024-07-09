@@ -25,7 +25,7 @@ source:
   sha256: 025d94a78fd035fd0e9e1e846222204aa49eaf6b12038fa67f2a822b3451cfd9
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
 
 requirements:
@@ -35,8 +35,12 @@ requirements:
     - make
     - nasm
     - libtool
+    - cudatoolkit {{ cudatoolkit }}            #[build_type == 'cuda']
   host:
     - zlib {{ zlib }}
+    - cudatoolkit {{ cudatoolkit }}            #[build_type == 'cuda']
+  run:
+    - cudatoolkit {{ cudatoolkit }}            #[build_type == 'cuda']
 
 about:
   home: http://www.ffmpeg.org/
