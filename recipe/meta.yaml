@@ -11,7 +11,6 @@ source:
   git_url: https://github.com/NVIDIA/DALI/
   git_rev: v{{ build_version }}
   patches:
-    - 0001-fix-build-by-adding-call-to-find_package-for-CUDA.patch     #[x86_64 and build_type == "cuda" and cudatoolkit == "12.2"]
     - 0002-cxx11-abi.patch
     - 0303-Fixed-errors-encountered-with-GCC-11.patch
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
