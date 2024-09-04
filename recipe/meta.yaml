@@ -48,7 +48,7 @@ outputs:
         - gast {{ gast }}
         - astunparse >=1.6.0
         - patchelf
-        - black =23.10.0
+        - black {{ black }}
       host:
         - cudatoolkit {{ cudatoolkit }}   #[build_type == 'cuda']
         - opencv {{ opencv }}
