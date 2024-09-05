@@ -21,7 +21,7 @@ set -ex
 ARCH="$(arch)"
 if [ ${ARCH} = "x86_64" ]; then
     ARCH_LONGNAME="x86_64-conda"
-    if [[ ${cudatoolkit} == "11.8" ]] || [[ ${cudatoolkit} == "12.2" ]]; then
+    if [[ ${cudatoolkit} == "11.8" ]]; then
         export BUILD_CVCUDA=OFF
     fi
 elif [ ${ARCH} = "ppc64le" ]; then
