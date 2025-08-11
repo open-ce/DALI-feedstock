@@ -16,7 +16,7 @@ source:
     - 0304-Fixed-Protobuf-detection-via-cmake.patch
 
 build:
-  number: 4
+  number: 5
   string: h{{ PKG_HASH }}_cuda{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   script_env:
     - CUDA_HOME
@@ -41,7 +41,7 @@ outputs:
         - libsndfile
         - libtar {{ libtar }}
         - python-clang {{ clang }}
-        - zlib {{ zlib }}
+        - zlib
         - openh264 2.1.0
         - dm-tree >=0.1.8
         - gast {{ gast }}
@@ -59,7 +59,7 @@ outputs:
         - lmdb {{ lmdb }}
         - libtiff {{ libtiff }}
         - libvorbis {{ libvorbis }}
-        - zlib {{ zlib }}
+        - zlib
         - openh264 2.1.0
         - jpeg-turbo {{ jpegturbo }}
         - cfitsio
