@@ -122,7 +122,7 @@ find $PKGNAME_PATH -type f -name "*.so*" -o -name "*.bin" | while read FILE; do
 done
 
 
-$PYTHON -m pip install --no-deps --ignore-installed --user dali/python
+$PYTHON -m pip install --no-deps --ignore-installed dali/python
 
 # Install the activate / deactivate scripts that set environment variables
 mkdir -p "${PREFIX}"/etc/conda/activate.d

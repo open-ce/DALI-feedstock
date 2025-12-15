@@ -62,5 +62,5 @@ cmake .. \
       -DTIMESTAMP=${DALI_TIMESTAMP} \
       -DGIT_SHA=${GIT_SHA}
 make -j install
-$PYTHON -m pip install --no-deps --ignore-installed .
+$PYTHON -m pip install --no-deps --ignore-installed --no-build-isolation .
 popd
